@@ -1,9 +1,10 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
+#!/usr/bin/env python # -*- coding: utf-8 -*- # from __future__ import unicode_literals
+
+SITENAME = "Mark White's Blog"
+SITETITLE = "Mark White"
+SITESUBTITLE = 'Software Developer'
 
 AUTHOR = 'mark'
-SITENAME = 'LiveToDie'
 SITEURL = ''
 
 PATH = 'content'
@@ -19,18 +20,17 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+MENUITEMS = (('Archives', '/archives.html'),
+             ('Categories', '/categories.html'),
+             ('Tags', '/tags.html'),)
 
 # Social widget
-SOCIAL = (('linkedin', 'https://br.linkedin.com/in/alexandrevicenzi/en'),
-          ('github', 'https://github.com/alexandrevicenzi'),
-          ('google', 'https://google.com/+AlexandreVicenzi'),
-          ('twitter', 'https://twitter.com/alxvicenzi'),
-          ('rss', '//blog.alexandrevicenzi.com/feeds/all.atom.xml'))
+SOCIAL =(
+    # ('linkedin', 'https://br.linkedin.com/in/alexandrevicenzi/en'),
+    ('github', 'https://github.com/markwh1te'),
+    ('twitter', 'https://twitter.com/wh1temark')
+    # ('xing', '//blog.alexandrevicenzi.com/feeds/all.atom.xml')
+)
 
 DEFAULT_PAGINATION = 10
 
@@ -38,3 +38,20 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 THEME = "Flex"
+
+# license related
+CC_LICENSE = {
+    'name': 'Creative Commons Attribution-ShareAlike',
+    'version': '4.0',
+    'slug': 'by-sa'
+}
+COPYRIGHT_YEAR = 2016
+
+MAIN_MENU = True
+
+
+# Blogroll
+# LINKS = (('Pelican', 'http://getpelican.com/'),
+#          ('Python.org', 'http://python.org/'),
+#          ('Jinja2', 'http://jinja.pocoo.org/'),
+#          ('You can modify those links in your config file', '#'),)
