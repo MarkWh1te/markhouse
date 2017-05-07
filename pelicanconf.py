@@ -5,7 +5,9 @@ SITETITLE = "Mark White"
 SITESUBTITLE = 'Software Developer'
 
 AUTHOR = 'mark'
+# SITEURL = '127.0.0.1:8000'
 SITEURL = ''
+
 
 PATH = 'content'
 
@@ -13,6 +15,11 @@ TIMEZONE = 'Europe/Paris'
 
 DEFAULT_LANG = 'en'
 
+# images related
+SITELOGO = SITEURL + '/images/profile.peg'
+FAVICON = SITEURL + '/images/favicon.ico'
+# SITELOGO = '/images/profile.peg'
+# FAVICON = '/images/profile.peg'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
