@@ -21,13 +21,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="" />
 
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Microsoft EDGE -->
+    <meta name="msapplication-TileColor" content="#333333">
 
     <meta name="author" content="mark" />
-    <meta name="description" content="" />
+    <meta name="description" content="mark's Thoughts and Writings" />
 <meta property="og:site_name" content="Mark White's Blog"/>
 <meta property="og:type" content="blog"/>
 <meta property="og:title" content="Mark White's Blog"/>
-<meta property="og:description" content=""/>
+<meta property="og:description" content="mark's Thoughts and Writings"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content=""/>
 <meta property="og:image" content="http://7xq2dq.com1.z0.glb.clouddn.com/bestreal.png">
@@ -44,11 +53,19 @@
       </a>
       <h1><a href="">Mark White</a></h1>
 
-<p>Software Developer</p>
+<p>Software Engineer</p>
+      <nav>
+        <ul class="list">
+
+          <li><a href="http://getpelican.com/" target="_blank">About</a></li>
+          <li><a href="http://python.org/" target="_blank">contact</a></li>
+        </ul>
+      </nav>
 
       <ul class="social">
         <li><a class="sc-github" href="https://github.com/markwh1te" target="_blank"><i class="fa fa-github"></i></a></li>
         <li><a class="sc-twitter" href="https://twitter.com/wh1temark" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-envelope-o" href="mailto:iamwh1temark@gmail.com" target="_blank"><i class="fa fa-envelope-o"></i></a></li>
       </ul>
     </div>
 
@@ -62,7 +79,6 @@
 
       <a href="/archives.html">Archives</a>
       <a href="/categories.html">Categories</a>
-      <a href="/tags.html">Tags</a>
 
 
     </nav>
@@ -71,32 +87,160 @@
 
 <article>
   <header>
-    <h2><a href="/my-first-review.html#my-first-review">My First Review</a></h2>
+    <h2><a href="/org-mode-jie-shao.html#org-mode-jie-shao">org mode 介紹</a></h2>
     <p>
-          Posted on Fri 03 December 2010 in <a href="/category/review.html">Review</a>
+          Posted on Sat 03 December 2016 in <a href="/category/editor.html">editor</a>
 
 
 
     </p>
   </header>
   <div>
-      <h1>this is a test <span class="math">\(e=mc^2\)</span></h1>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript' …</script>
+      <h1>org mode 介紹</h1>
+<h2>總體介紹</h2>
+<ul>
+<li>作爲一個曾經的vimer 讓我轉向emacs 的主要原因就是org mode. 同樣作爲make up language，在 org mode 下可以輕鬆地實現 markdown中的所有效果， 但它更強的功能是在於GTD管理,和強大的導出功能.</li>
+</ul>
+<h2>用org mode做GTD</h2>
+<ul>
+<li>在org mode中在任意的一行按下C c C t 就可以讓這行文字作爲代辦事宜在To Do 和Done 之間切換，而按下C c C s則可以爲這件待辦事宜設置準備完成的時間。在安裝了org aganda之後，無論你在編輯什麼文件時候都可以打開 org aganda 查看自己還有什麼事情沒有完成。如果你是在mac os下使用emacs 你甚至可以把所有待辦事宜導出爲icandeler文件,配合icanderler 使用。</li>
+<li>在使用了org mode之後，我現在每天打開電腦第一件事情就是按下C a o a查看自己的今天的安排是什麼 …</li></ul>
       <br>
-      <a class="btn" href="/my-first-review.html#my-first-review">    Continue reading
+      <a class="btn" href="/org-mode-jie-shao.html#org-mode-jie-shao">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/tong-guo-wei-xin-wang-ye-apishou-ji-wei-xin-qun-liao-tian-ji-lu.html#tong-guo-wei-xin-wang-ye-apishou-ji-wei-xin-qun-liao-tian-ji-lu">通过微信网页api收集微信群聊天记录</a></h2>
+    <p>
+          Posted on Wed 03 August 2016 in <a href="/category/wechat.html">wechat</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <ul>
+<li>背景</li>
+</ul>
+<p>由于我们公司目前产品的信息都是通过人工录入的，在时效性和准确性上都有一定的折扣，在和同事们讨论过之后，决定采用通过网页版微信api来采集在各个金融微信群中的聊天记录，再通过自然语言分析进行产品库的扩充．</p>
+<ul>
+<li>微信web版本</li>
+</ul>
+<p>这篇文章介绍了<a href="http://www.tanhao.me/talk/1466.html/">微信web版登陆的全过程</a>，微信web端的登陆本质上就是通过访问服务器分配的会话ID去获得登陆的二维码，我们在这个项目中用到微信机器人就是通过这个api进行开发的．</p>
+<ul>
+<li>微信机器人</li>
+</ul>
+<p>开源项目<a href="https://github.com/liuwons/wxBot">wxbot</a>
+，本质是一个微信web版的ＡＰＩ.这个项目所有的逻辑都在ＷＸＢot这个类中，通过改写这个类的不同方法，我们可以取到登陆微信账号联系人，聊天信息，群组，公众号等信息．</p>
+<p>在收集金融群信息的过程中，我主要重写了handle_msg_all这个方法，判断消息是否为群消息，再将群消息存入数据库．</p>
+<p>注意wxbot这个项目中WXBot类　使用的是old　style 不可以使用super方法！</p>
+<p><img alt="deadeadea" src="https://www.jianguoyun.com/c/tblv2/CLjyGBIgulfdHVYmY8uNENC48-RXz8AIyBBz16jOpy_JQYyXG8Q/56jwgOMsPUQ/l"></p>
+<ul>
+<li>部署与使用</li>
+</ul>
+<p>为了可以随时控制微信机器人是否继续抓取消息，我选择了用supervisor来控制，在部署django的server之后，启动supervisor.(即在manage.py的同级目录下输入supervisord)会发现在当前目录下生成了qr.png文件．（如果你是在本地运行的会发现qr.png文件被自动打开了）这个qr.png文件就是根据本次会话id生成的二维码，用微信扫描这个二维码之后就可以登陆了，于此同时所有的群聊天记录都会被记录．</p>
+      <br>
+      <a class="btn" href="/tong-guo-wei-xin-wang-ye-apishou-ji-wei-xin-qun-liao-tian-ji-lu.html#tong-guo-wei-xin-wang-ye-apishou-ji-wei-xin-qun-liao-tian-ji-lu">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/jian-li-jenkins-chi-xu-ji-cheng-huan-jing.html#jian-li-jenkins-chi-xu-ji-cheng-huan-jing">建立Jenkins 持续集成环境</a></h2>
+    <p>
+          Posted on Thu 03 December 2015 in <a href="/category/server.html">Server</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <ul>
+<li>下载安装Jenkins(on Ubuntu)</li>
+</ul>
+<blockquote>
+<p>wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key </p>
+<p>sudo apt-key add -</p>
+<p>sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable </p>
+<p>binary/ &gt; /etc/apt/sources.list.d/jenkins.list'</p>
+<p>sudo apt-get update</p>
+<p>sudo apt-get install jenkins</p>
+</blockquote>
+<ul>
+<li>配置jenkins (配合django-jenkins)</li>
+</ul>
+<p>jenkins安装后,会自动启动,默认是在8080</p>
+      <br>
+      <a class="btn" href="/jian-li-jenkins-chi-xu-ji-cheng-huan-jing.html#jian-li-jenkins-chi-xu-ji-cheng-huan-jing">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/use-inoic-build-android-app.html#use-inoic-build-android-app">Use Inoic Build Android App</a></h2>
+    <p>
+          Posted on Wed 03 December 2014 in <a href="/category/front-end.html">front end</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <p><a href="http://ionicframework.com/docs/guide/installation.html">Ionic Official Guide</a></p>
+<h3>1. Install JDK</h3>
+<p>open your termial</p>
+<blockquote>
+<p>sudo apt-get install openjdk-7-jre</p>
+</blockquote>
+<h3>2. Install Android SDK</h3>
+<p><a href="http://cordova.apache.org/docs/en/3.4.0/guide/platforms/android/index.html#Android%20Platform%20Guide">Cordova Official Guide</a></p>
+<ul>
+<li>Download android SDK</li>
+</ul>
+<p><strong>Android SDK means Android software development kit.It includes a comprehensive set of development tools.</strong></p>
+<p><a href="https://en.wikipedia.org/wiki/Software_development_kit">What is SDK?</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Android_software_development">Android software development</a></p>
+<p><a href="https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz">linux android Sdk Download Link</a> </p>
+<ul>
+<li>Add …</li></ul>
+      <br>
+      <a class="btn" href="/use-inoic-build-android-app.html#use-inoic-build-android-app">    Continue reading
+</a>
+  </div>
+  <hr />
+</article>
+<article>
+  <header>
+    <h2><a href="/shua-ti-de-zheng-que-zi-shi.html#shua-ti-de-zheng-que-zi-shi">刷题的正确姿势</a></h2>
+    <p>
+          Posted on Sun 03 August 2014 in <a href="/category/algorithms.html">Algorithms</a>
+
+
+
+    </p>
+  </header>
+  <div>
+      <p>刷题是指通过大量题目进行针对性的训练，如果掌握了有效方法不但可以有效地巩固学过的知识而且也可以在这个过程中收获很多的快乐！</p>
+<p>很多人认为刷题就是单纯地做题，这个认识是片面的。就像我之前说，刷题是__针对性的训练__。做题只是这个训练的表现形式。而一次正确训练过程应该是包括目标制定，执行操作，结果分析三个部分的。</p>
+<p>拿我在leecode上遇到的这道happy number来举例：</p>
+<p><img alt="leecode" src="http://7xq2dq.com1.z0.glb.clouddn.com/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-21%20%E4%B8%8B%E5%8D%8811.30.25.png"></p>
+<p>简单分析一下题目的大意，就是编写一个算法判断某个数字是否是“快乐数”。</p>
+<p>快乐数的定义过程如下：从任意一个正整数开始，将原数替换为其每一位的平方和，重复此过程直到数字=1（此时其值将不再变化），或者进入一个不包含1的无限循环。那些以1为过程终止的数字即为“快乐数”。（就想图片中那个example中的19一样）</p>
+<ul>
+<li>目标制定</li>
+</ul>
+<p>我们有看到题目中hash table的标签，那么我们这次训练目标自然是巩固hash这个知识点了。我们可以把每次各位平方和的结果储存在一个集合（hash table）中，如果某次各位平方和结果在这个集合中已经储存过了，那么说明已经进入循环了，则这个数不是happy number，反正如果到最后结果是1，这个数就是happy number。
+* 执行操作</p>
+<p>如果有清晰的想法，coding会变得轻松很多，python代码如下所示：</p>
+<div class="highlight"><pre><span></span><span class="kr">class</span> <span class="nx">Solution</span><span class="p">()</span><span class="o">:</span>
+  <span class="nx">def</span> <span class="nx">isHappy</span><span class="p">(</span><span class="nx">self</span><span class="p">,</span> <span class="nx">n …</span></pre></div>
+      <br>
+      <a class="btn" href="/shua-ti-de-zheng-que-zi-shi.html#shua-ti-de-zheng-que-zi-shi">    Continue reading
 </a>
   </div>
 </article>
@@ -137,7 +281,7 @@
   "name": " Mark White's Blog ",
   "url" : "",
   "image": "http://7xq2dq.com1.z0.glb.clouddn.com/bestreal.png",
-  "description": ""
+  "description": "mark's Thoughts and Writings"
 }
 </script>
 
