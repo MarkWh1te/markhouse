@@ -16,10 +16,10 @@ TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = 'en'
 
 # images related
-SITELOGO = SITEURL + '/images/profile.peg'
-FAVICON = SITEURL + '/images/favicon.ico'
-# SITELOGO = '/images/profile.peg'
-# FAVICON = '/images/profile.peg'
+# SITELOGO = SITEURL + '/images/profile.peg'
+# FAVICON = SITEURL + '/images/favicon.ico'
+SITELOGO = 'http://7xq2dq.com1.z0.glb.clouddn.com/bestreal.png'
+FAVICON = 'http://7xq2dq.com1.z0.glb.clouddn.com/bestreal.png'
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
@@ -55,6 +55,11 @@ CC_LICENSE = {
 COPYRIGHT_YEAR = 2016
 
 MAIN_MENU = True
+
+# plugins
+PLUGIN_PATHS = ['pelican-plugins']
+PLUGINS = ["render_math"]
+
 
 
 # Blogroll
