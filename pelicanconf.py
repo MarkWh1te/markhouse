@@ -75,8 +75,8 @@ MENUITEMS = (
 
 # Blogroll
 LINKS = (
-    ('About', 'http://getpelican.com/'),
-    ('contact', 'http://python.org/'),
+    ('About', 'pages/about.html'),
+    ('contact', 'pages/contact.html'),
     # ('Jinja2', 'http://jinja.pocoo.org/'),
     # ('You can modify those links in your config file', '#'),
 )
