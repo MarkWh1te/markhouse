@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python # -*- coding: utf-8 -*-
 # from __future__ import unicode_literals
 
 SITENAME = "Mark White's Blog"
@@ -13,6 +12,7 @@ SITEDESCRIPTION = '%s\'s Thoughts and Writings' % AUTHOR
 BROWSER_COLOR = '#333333'
 
 # SITEURL = '127.0.0.1:8000'
+# SITEURL = 'markwh1te.github.io'
 SITEURL = ''
 
 
@@ -25,8 +25,8 @@ DEFAULT_LANG = 'en'
 # images related
 # SITELOGO = SITEURL + '/images/profile.peg'
 # FAVICON = SITEURL + '/images/favicon.ico'
-SITELOGO = 'http://7xq2dq.com1.z0.glb.clouddn.com/bestreal.png'
-FAVICON = 'http://7xq2dq.com1.z0.glb.clouddn.com/bestreal.png'
+SITELOGO = 'http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg'
+FAVICON = 'http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg'
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -57,7 +57,7 @@ CC_LICENSE = {
     'version': '4.0',
     'slug': 'by-sa'
 }
-COPYRIGHT_YEAR = 2016
+COPYRIGHT_YEAR = 2017
 
 
 # plugins
@@ -65,18 +65,20 @@ PLUGIN_PATHS = ['pelican-plugins']
 PLUGINS = ["render_math"]
 
 # menu related
-MAIN_MENU = True
+# MAIN_MENU = True
+MAIN_MENU = False
 
-MENUITEMS = (
-    ('Archives', '/archives.html'),
-    ('Categories', '/categories.html'),
-             # ('Tags', '/tags.html'),
-)
+# MENUITEMS = (
+#     ('Archives', '/archives.html'),
+#     ('Categories', '/categories.html'),
+#              # ('Tags', '/tags.html'),
+# )
 
 # Blogroll
 LINKS = (
-    ('About', 'pages/about.html'),
-    ('contact', 'pages/contact.html'),
-    # ('Jinja2', 'http://jinja.pocoo.org/'),
+    ('home', 'http://markwh1te.github.io'),
+    ('archives', 'http://markwh1te.github.io/archives.html'),
+    ('categories', 'http://markwh1te.github.io/categories.html'),
+    # ('contact', 'pages/contact.html'),
     # ('You can modify those links in your config file', '#'),
 )
