@@ -1,5 +1,4 @@
-#!/usr/bin/env python # -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
+
 
 SITENAME = "Mark White's Blog"
 SITETITLE = "Mark White"
@@ -12,7 +11,6 @@ SITEDESCRIPTION = '%s\'s Thoughts and Writings' % AUTHOR
 BROWSER_COLOR = '#333333'
 
 # SITEURL = '127.0.0.1:8000'
-# SITEURL = 'markwh1te.github.io'
 SITEURL = ''
 
 
@@ -23,8 +21,8 @@ TIMEZONE = 'Europe/Paris'
 DEFAULT_LANG = 'en'
 
 # images related
-# SITELOGO = SITEURL + '/images/profile.peg'
-# FAVICON = SITEURL + '/images/favicon.ico'
+# SITELOGO = SITEURL + '/img/minlake.jpg'
+# FAVICON = SITEURL + '/img/minlake.jpg'
 SITELOGO = 'http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg'
 FAVICON = 'http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg'
 
@@ -41,8 +39,6 @@ SOCIAL =(
     # ('linkedin', 'https://br.linkedin.com/in/alexandrevicenzi/en'),
     ('github', 'https://github.com/markwh1te'),
     ('twitter', 'https://twitter.com/wh1temark'),
-    ('envelope-o', 'mailto:iamwh1temark@gmail.com')
-)
 
 DEFAULT_PAGINATION = 10
 
