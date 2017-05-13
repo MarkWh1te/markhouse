@@ -15,14 +15,14 @@ SITEURL = ''
 
 
 PATH = 'content'
-
+STATIC_PATHS = ['images']
 TIMEZONE = 'Europe/Paris'
 
 DEFAULT_LANG = 'en'
 
 # images related
-# SITELOGO = SITEURL + '/img/minlake.jpg'
-# FAVICON = SITEURL + '/img/minlake.jpg'
+# SITELOGO = SITEURL + '/images/minlake.jpg'
+# FAVICON = SITEURL + '/images/minlake.jpg'
 SITELOGO = 'http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg'
 FAVICON = 'http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg'
 
@@ -32,13 +32,6 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
-
-
-# Social widget
-SOCIAL =(
-    # ('linkedin', 'https://br.linkedin.com/in/alexandrevicenzi/en'),
-    ('github', 'https://github.com/markwh1te'),
-    ('twitter', 'https://twitter.com/wh1temark'),
 
 DEFAULT_PAGINATION = 10
 
@@ -58,7 +51,10 @@ COPYRIGHT_YEAR = 2017
 
 # plugins
 PLUGIN_PATHS = ['pelican-plugins']
-PLUGINS = ["render_math"]
+PLUGINS = ["i18n_subsites","render_math"]
+JINJA_ENVIRONMENT = {
+    'extensions': ['jinja2.ext.i18n'],
+}
 
 # menu related
 # MAIN_MENU = True
@@ -72,9 +68,9 @@ MAIN_MENU = False
 
 # Blogroll
 LINKS = (
-    ('home', 'http://markwh1te.github.io'),
-    ('archives', 'http://markwh1te.github.io/archives.html'),
-    ('categories', 'http://markwh1te.github.io/categories.html'),
+    ('home', 'http://blog.markwh1te.me'),
+    ('archives', '/archives.html'),
+    ('categories', '/categories.html'),
     # ('contact', 'pages/contact.html'),
     # ('You can modify those links in your config file', '#'),
 )
