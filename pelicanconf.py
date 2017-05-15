@@ -1,8 +1,5 @@
-
-
 SITENAME = "Mark White's Blog"
 SITETITLE = "Mark White"
-
 AUTHOR = 'mark'
 
 SITESUBTITLE = 'Software Engineer'
@@ -68,7 +65,7 @@ MAIN_MENU = False
 
 # Blogroll
 LINKS = (
-    ('home', 'http://blog.markwh1te.me'),
+    ('home', '/'),
     ('archives', '/archives.html'),
     ('categories', '/categories.html'),
     # ('contact', 'pages/contact.html'),
