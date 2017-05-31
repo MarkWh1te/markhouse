@@ -3,12 +3,14 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
-timezone:
+title: MarkWh1tes Blog
+subtitle: Pain past is pleasure
+description: Pain past is pleasure
+author: MarkWh1te
+language: en
+
+
+timezone: Africa/Abidjan
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'

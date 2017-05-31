@@ -1,6 +1,13 @@
-Title: 刷题的正确姿势
-Date: 2014-8-03 09:20
-Category:Algorithms
+---
+title: 刷题的正确姿势
+date: 2014-8-03 09:20
+tags:
+  - math
+  - time killer
+category: Algorithms
+---
+
+
 
 
 刷题是指通过大量题目进行针对性的训练，如果掌握了有效方法不但可以有效地巩固学过的知识而且也可以在这个过程中收获很多的快乐！

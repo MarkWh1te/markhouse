@@ -1,6 +1,11 @@
-Title:建立Jenkins 持续集成环境
-Date: 2015-12-03 10:20
-Category:Server
+---
+title: 建立Jenkins 持续集成环境
+date: 2015-12-03 10:20
+tags:
+  - CI
+  - jenkins
+categories: server
+---
 
 * 下载安装Jenkins(on Ubuntu)
 

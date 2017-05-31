@@ -1,6 +1,13 @@
-Title: 通过微信网页api收集微信群聊天记录
-Date: 2016-08-03 21:20
-Category:wechat
+---
+title: 通过微信网页api收集微信群聊天记录
+date: 2016-08-03 21:20
+tags:
+  - wechat
+category: serve
+---
+
+
+
 
 
 * 背景

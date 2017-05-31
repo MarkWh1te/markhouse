@@ -1,8 +1,11 @@
-Title: org mode 介紹
-Date: 2016-12-03 10:20
-Category: editor
-# org mode 介紹
-
+---
+title: org mode 介紹
+date: 2017-04-30 10:36:00
+tags:
+  - editor
+  - time killer
+categories: tools
+---
 
 ## 總體介紹
 

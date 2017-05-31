@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="wechat," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="背景  由于我们公司目前产品的信息都是通过人工录入的，在时效性和准确性上都有一定的折扣，在和同事们讨论过之后，决定采用通过网页版微信api来采集在各个金融微信群中的聊天记录，再通过自然语言分析进行产品库的扩充．  微信web版本  这篇文章介绍了微信web版登陆的全过程，微信web端的登陆本质上就是通过访问服务器分配的会话ID去获得登陆的二维码，我们在这个项目中用到微信机器人就是通过这个api进">
+<meta name="keywords" content="wechat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过微信网页api收集微信群聊天记录">
+<meta property="og:url" content="http://yoursite.com/2016/08/04/wxbot/index.html">
+<meta property="og:site_name" content="MarkWh1tes Blog">
+<meta property="og:description" content="背景  由于我们公司目前产品的信息都是通过人工录入的，在时效性和准确性上都有一定的折扣，在和同事们讨论过之后，决定采用通过网页版微信api来采集在各个金融微信群中的聊天记录，再通过自然语言分析进行产品库的扩充．  微信web版本  这篇文章介绍了微信web版登陆的全过程，微信web端的登陆本质上就是通过访问服务器分配的会话ID去获得登陆的二维码，我们在这个项目中用到微信机器人就是通过这个api进">
+<meta property="og:image" content="https://www.jianguoyun.com/c/tblv2/CLjyGBIgulfdHVYmY8uNENC48-RXz8AIyBBz16jOpy_JQYyXG8Q/56jwgOMsPUQ/l">
+<meta property="og:updated_time" content="2017-05-31T12:38:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过微信网页api收集微信群聊天记录">
+<meta name="twitter:description" content="背景  由于我们公司目前产品的信息都是通过人工录入的，在时效性和准确性上都有一定的折扣，在和同事们讨论过之后，决定采用通过网页版微信api来采集在各个金融微信群中的聊天记录，再通过自然语言分析进行产品库的扩充．  微信web版本  这篇文章介绍了微信web版登陆的全过程，微信web端的登陆本质上就是通过访问服务器分配的会话ID去获得登陆的二维码，我们在这个项目中用到微信机器人就是通过这个api进">
+<meta name="twitter:image" content="https://www.jianguoyun.com/c/tblv2/CLjyGBIgulfdHVYmY8uNENC48-RXz8AIyBBz16jOpy_JQYyXG8Q/56jwgOMsPUQ/l">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/04/wxbot/"/>
+
+
+
+
+
+  <title>通过微信网页api收集微信群聊天记录 | MarkWh1tes Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MarkWh1tes Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Pain past is pleasure</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/04/wxbot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MarkWh1te">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MarkWh1tes Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">通过微信网页api收集微信群聊天记录</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-03T21:20:00Z">
+                2016-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/serve/" itemprop="url" rel="index">
+                    <span itemprop="name">serve</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>背景</li>
+</ul>
+<p>由于我们公司目前产品的信息都是通过人工录入的，在时效性和准确性上都有一定的折扣，在和同事们讨论过之后，决定采用通过网页版微信api来采集在各个金融微信群中的聊天记录，再通过自然语言分析进行产品库的扩充．</p>
+<ul>
+<li>微信web版本</li>
+</ul>
+<p>这篇文章介绍了<a href="http://www.tanhao.me/talk/1466.html/" target="_blank" rel="external">微信web版登陆的全过程</a>，微信web端的登陆本质上就是通过访问服务器分配的会话ID去获得登陆的二维码，我们在这个项目中用到微信机器人就是通过这个api进行开发的．</p>
+<ul>
+<li>微信机器人</li>
+</ul>
+<p>开源项目<a href="https://github.com/liuwons/wxBot" target="_blank" rel="external">wxbot</a><br>，本质是一个微信web版的ＡＰＩ.这个项目所有的逻辑都在ＷＸＢot这个类中，通过改写这个类的不同方法，我们可以取到登陆微信账号联系人，聊天信息，群组，公众号等信息．</p>
+<p>在收集金融群信息的过程中，我主要重写了handle_msg_all这个方法，判断消息是否为群消息，再将群消息存入数据库．</p>
+<p>注意wxbot这个项目中WXBot类　使用的是old　style 不可以使用super方法！</p>
+<p><img src="https://www.jianguoyun.com/c/tblv2/CLjyGBIgulfdHVYmY8uNENC48-RXz8AIyBBz16jOpy_JQYyXG8Q/56jwgOMsPUQ/l" alt="deadeadea"></p>
+<ul>
+<li>部署与使用</li>
+</ul>
+<p>为了可以随时控制微信机器人是否继续抓取消息，我选择了用supervisor来控制，在部署django的server之后，启动supervisor.(即在manage.py的同级目录下输入supervisord)会发现在当前目录下生成了qr.png文件．（如果你是在本地运行的会发现qr.png文件被自动打开了）这个qr.png文件就是根据本次会话id生成的二维码，用微信扫描这个二维码之后就可以登陆了，于此同时所有的群聊天记录都会被记录．</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/wechat/" rel="tag"># wechat</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/31/ionic_build/" rel="next" title="Use Inoic Build Android App">
+                <i class="fa fa-chevron-left"></i> Use Inoic Build Android App
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/30/Spark_conslu/" rel="prev" title="Spark 总结(一) 基础">
+                Spark 总结(一) 基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="MarkWh1te" />
+          <p class="site-author-name" itemprop="name">MarkWh1te</p>
+           
+              <p class="site-description motion-element" itemprop="description">Pain past is pleasure</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MarkWh1te</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

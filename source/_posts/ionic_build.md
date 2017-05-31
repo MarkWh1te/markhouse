@@ -1,4 +1,13 @@
-Title: Use Inoic Build Android App
+---
+title: Use Inoic Build Android App
+date: 2016-05-30 17:36:29
+tags:
+  - android
+  - inoic
+categories: tools
+---
+
+
 Date: 2014-12-03 10:20
 Category:front end
 
