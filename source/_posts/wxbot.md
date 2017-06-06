@@ -1,9 +1,9 @@
 ---
 title: 通过微信网页api收集微信群聊天记录
-date: 2016-08-03 21:20
+date: 2016-01-03 21:20
 tags:
   - wechat
-category: serve
+category: server
 ---
 
 
@@ -28,7 +28,6 @@ category: serve
 
 注意wxbot这个项目中WXBot类　使用的是old　style 不可以使用super方法！
 
-![deadeadea](https://www.jianguoyun.com/c/tblv2/CLjyGBIgulfdHVYmY8uNENC48-RXz8AIyBBz16jOpy_JQYyXG8Q/56jwgOMsPUQ/l)
 
 * 部署与使用
 

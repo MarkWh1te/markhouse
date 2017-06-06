@@ -12,14 +12,14 @@ categories: bigdata
 #### 在Spark中RDDs是最基本的容器 , 它支持和scala collection 类似的API,比如map，fold，和filter.可以将它理解为这样的一个抽象类
 
 ``` scala
-val points = sc.textFile(...).map(parsePoint).persist()
-var w = Vector.zeros(d)
-for (i<-1 to numIterations){
-  val gradient = points.map{
-        p=> (1/(1+exp(-p.y*w.dot(p.x)))-1)*p.y*p.y 
-  }.reduce(_+_)
-  w -= alpha*gradient
-}
+abstract class RDD[T]{
+     def map[U](f:T=>U):RDD[U] =
+     def flatMap[U]
+     def filter
+     def reduce
+     def fold
+     def aggregate
+   }
 ```
 
 #### 创建一个RDD有两种办法：

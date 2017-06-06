@@ -1,0 +1,927 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="machine learning,deep learning,data mining," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="lecture 2aan overview of the main types of neural network architecture feed-forward neural networks(more than one hidden layer call them “deep” neural networks) recurrent networksthese have directly c">
+<meta name="keywords" content="machine learning,deep learning,data mining">
+<meta property="og:type" content="article">
+<meta property="og:title" content="perceptron">
+<meta property="og:url" content="http://yoursite.com/2017/06/06/perceptron/index.html">
+<meta property="og:site_name" content="MarkWh1te&#39;s Blog">
+<meta property="og:description" content="lecture 2aan overview of the main types of neural network architecture feed-forward neural networks(more than one hidden layer call them “deep” neural networks) recurrent networksthese have directly c">
+<meta property="og:updated_time" content="2017-06-06T23:36:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="perceptron">
+<meta name="twitter:description" content="lecture 2aan overview of the main types of neural network architecture feed-forward neural networks(more than one hidden layer call them “deep” neural networks) recurrent networksthese have directly c">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/06/06/perceptron/"/>
+
+
+
+
+
+  <title>perceptron | MarkWh1te's Blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MarkWh1te's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Pain past is pleasure</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/06/perceptron/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="MarkWhite">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MarkWh1te's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">perceptron</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-06T15:00:00+08:00">
+                2017-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="lecture-2a"><a href="#lecture-2a" class="headerlink" title="lecture 2a"></a>lecture 2a</h1><h2 id="an-overview-of-the-main-types-of-neural-network-architecture"><a href="#an-overview-of-the-main-types-of-neural-network-architecture" class="headerlink" title="an overview of the main types of neural network architecture"></a>an overview of the main types of neural network architecture</h2><ul>
+<li>feed-forward neural networks(more than one hidden layer call them “deep” neural networks)</li>
+<li>recurrent networks<br>these have directly cycles in their connection</li>
+</ul>
+<ul>
+<li>for modeling sequences</li>
+</ul>
+<ul>
+<li>symmetrically connected networks</li>
+</ul>
+<h1 id="lecture-2b"><a href="#lecture-2b" class="headerlink" title="lecture 2b"></a>lecture 2b</h1><h2 id="statistical-pattern-recognition"><a href="#statistical-pattern-recognition" class="headerlink" title="statistical pattern recognition"></a>statistical pattern recognition</h2><ol>
+<li>convert the raw input vector into a vector of feature activations</li>
+<li>learn how to weight each of the feature activations to get a single scalar quantity</li>
+<li>if this quantity is above some threshold decide that the input vector is positive example of the target class<h2 id="architecture"><a href="#architecture" class="headerlink" title="architecture"></a>architecture</h2>decision unit<br>learned weights<br>feature units<br>hand-coded weights or programs<br>input units<h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2></li>
+</ol>
+<ul>
+<li>1960’s </li>
+<li>1969 minsky shows perceptrons limits, and many people thought theses limitations applied to all neural network models.</li>
+<li>the perceptrons is still widely used today for tasks with enormous feature vectors that contain many millions of feature<h2 id="binary-threshold-neuron-decision-unit"><a href="#binary-threshold-neuron-decision-unit" class="headerlink" title="binary threshold neuron(decision unit)"></a>binary threshold neuron(decision unit)</h2></li>
+<li>mcculloch-pitts(1943)<br>$$<br>z = \sum_{k=1}^n xw +b<br>$$<br>y = 1 if z &gt;= 0 else 0<h2 id="how-to-biases-using-the-same-rule-as-we-use-for-learning-weights"><a href="#how-to-biases-using-the-same-rule-as-we-use-for-learning-weights" class="headerlink" title="how to biases using the same rule  as we use for learning weights"></a>how to biases using the same rule  as we use for learning weights</h2></li>
+<li>A threshold  is equivalent to having a negative bias</li>
+<li>We can avoid having to figure out a separate learning rule for the bias by using a trick:</li>
+</ul>
+<ul>
+<li>A bias is exactly equivalent to a weight on an extra input line that always has an activity of 1</li>
+<li>we can now learn a bias as if it were a weight</li>
+</ul>
+<h2 id="the-perceptron-convergence-important-procedure-training-binary-out-neuron-as-classifiers"><a href="#the-perceptron-convergence-important-procedure-training-binary-out-neuron-as-classifiers" class="headerlink" title="the perceptron convergence(important!) :procedure training  binary out neuron as classifiers"></a>the perceptron convergence(important!) :procedure training  binary out neuron as classifiers</h2><ul>
+<li>add an extra component with value 1 to each input vectors . The “bias” weight on this component is minus the threshold.Now we can forget </li>
+<li>pick training cases using any policy that ensures that every  training case will keep getting picked</li>
+<li>the procedure:</li>
+</ul>
+<ul>
+<li>if the output unit is correct, leave its weight alone</li>
+<li>if the output unit in correctly output a zero, add the input vector to the weight vector</li>
+<li>if the output unit incorrectly output a 1, subtract the input vector<br>from the weight vector</li>
+</ul>
+<ul>
+<li>this is guaranteed to find a set of weights that gets the right answer for all the training cases  if any such set exists</li>
+</ul>
+<h1 id="lecture-2c"><a href="#lecture-2c" class="headerlink" title="lecture 2c"></a>lecture 2c</h1><h1 id="geometrical-view-of-perceptrons"><a href="#geometrical-view-of-perceptrons" class="headerlink" title="geometrical view of perceptrons"></a>geometrical view of perceptrons</h1><h2 id="weights-space"><a href="#weights-space" class="headerlink" title="weights space"></a>weights space</h2><ul>
+<li>this space has one dimension  per wights</li>
+<li>a point in the space represents a particular setting of all the weights</li>
+<li>assuming that we have eliminated the threshold, each training case can be represented as a hyperplane through the origin </li>
+</ul>
+<ul>
+<li>the weights must lie on one side of this hyper-plane to get the answer correct</li>
+</ul>
+<ul>
+<li>each training case defines a plane </li>
+</ul>
+<ul>
+<li>on one side of the plane the output is wrong because the scalar product of the weight vector with the input vector has the wrong sign.<h2 id="the-cone-圆锥-of-feasible-solutions"><a href="#the-cone-圆锥-of-feasible-solutions" class="headerlink" title="the cone(圆锥) of feasible solutions"></a>the cone(圆锥) of feasible solutions</h2></li>
+</ul>
+<ul>
+<li>to get all training case right we need to find a point on the right side of all the planes</li>
+<li>if there are any weight vector that get the right answer for all cases, they lie in a hyper-cone with its apex at the origin .</li>
+</ul>
+<ul>
+<li>the average of two good weight vector is a good vector </li>
+</ul>
+<ul>
+<li>so the problem is convex</li>
+</ul>
+<h1 id="lecture-2d"><a href="#lecture-2d" class="headerlink" title="lecture 2d"></a>lecture 2d</h1><h2 id="why-the-learning-works"><a href="#why-the-learning-works" class="headerlink" title="why the learning works"></a>why the learning works</h2><ul>
+<li>consider the squared distance $$ d^{2}<em>{a} + d^{2}</em>{b} $$between any feasible weight vector and the current weight vector</li>
+</ul>
+<ul>
+<li>hopeful claim: every time the perceptron make a mistake, the learning algorithms moves the current weight vector closer to all feasible weight  vectors.<h2 id="informal-sketch-of-proof-of-convergence"><a href="#informal-sketch-of-proof-of-convergence" class="headerlink" title="informal sketch of proof of convergence"></a>informal sketch of proof of convergence</h2></li>
+</ul>
+<ul>
+<li>each time the perceptron makes a mistake ,the current weight vector  moves to decrease its squared distance from every weight vector in the “generously feasible” region.</li>
+<li>the squared distance decrease by at least the squared length of the input vector</li>
+<li>so after a finite number of mistake, the weight vector must lie in the feasible region if this region exists</li>
+</ul>
+<h1 id="lecture-2e"><a href="#lecture-2e" class="headerlink" title="lecture 2e"></a>lecture 2e</h1><h1 id="what-perceptron-can’t-do"><a href="#what-perceptron-can’t-do" class="headerlink" title="what perceptron can’t do"></a>what perceptron can’t do</h1><h2 id="the-limitations-of-perceptrons"><a href="#the-limitations-of-perceptrons" class="headerlink" title="the limitations of perceptrons"></a>the limitations of perceptrons</h2><ul>
+<li>if you are allowed to choose the features by hand and if you use enough features ,you can do almost anythings</li>
+</ul>
+<ul>
+<li>for binary input vectors, we can have a separate feature use each of the exponentially many binary vectors and so we can make any possible discrimination on binary input vectors.</li>
+</ul>
+<ul>
+<li>this type of table look-up won’t generalize</li>
+<li>but once the hand-coded feature have been determined, the are very strong limitations on what a perceptron can learn </li>
+</ul>
+<h2 id="what-binary-threshold-neuron-cannot-do"><a href="#what-binary-threshold-neuron-cannot-do" class="headerlink" title="what binary threshold neuron cannot do"></a>what binary threshold neuron cannot do</h2><ul>
+<li><p>a binary threshold output unit cannot even tell if two single bit feature are the same<br>positive case (same): (1,1)-&gt;1,(0,0)-&gt;1<br>negative case (different): (1,0)-&gt;0,(0,1)-&gt;0</p>
+</li>
+<li><p>the four input-output pairs give four inequalities to satisfy<br>$$<br>w_1+w_2 &gt;= \theta ,0 &gt;= \theta<br>$$</p>
+</li>
+</ul>
+<p>$$<br>w_1 &lt; \theta , w_2&lt; \theta<br>$$</p>
+<h2 id="geometric-view-of-what-binary-threshold-neuron-cannot-do"><a href="#geometric-view-of-what-binary-threshold-neuron-cannot-do" class="headerlink" title="geometric view of what binary threshold neuron cannot do"></a>geometric view of what binary threshold neuron cannot do</h2><ul>
+<li>imagine “data-space” in which the correspond to component of an input vector</li>
+</ul>
+<ul>
+<li>each input vector is a point in this space</li>
+<li>a weight vector defines a plane in data-space</li>
+<li>the weight plane is perpendicular to the weight vector and misses the origin by a distance equal to the threshold </li>
+<li>not linearly separate<h2 id="discriminating-simple-patterns-under-translation-with-wrap-around"><a href="#discriminating-simple-patterns-under-translation-with-wrap-around" class="headerlink" title="discriminating simple patterns under translation with wrap-around"></a>discriminating simple patterns under translation with wrap-around</h2></li>
+</ul>
+<ul>
+<li>suppose we just use pixels as the features.</li>
+<li>can a binary threshold unit discriminate between different patterns that have the same number of on pixels</li>
+</ul>
+<ul>
+<li>not if the patterns can translate with wrap-around<h2 id="sketch-of-a-proof-that-a-binary-decision-unit-cannot-discriminate-patterns-with-the-same-number-of-on-pixels-assuming-translation-with-wrap-around"><a href="#sketch-of-a-proof-that-a-binary-decision-unit-cannot-discriminate-patterns-with-the-same-number-of-on-pixels-assuming-translation-with-wrap-around" class="headerlink" title="sketch of a proof that a binary decision unit cannot discriminate patterns with the same number of on pixels(assuming translation with wrap-around)"></a>sketch of a proof that a binary decision unit cannot discriminate patterns with the same number of on pixels(assuming translation with wrap-around)</h2></li>
+</ul>
+<ul>
+<li>for pattern A, use training cases in all possible translations.</li>
+</ul>
+<ul>
+<li>each pixels will be activated by 4 different translations of pattern A</li>
+<li>so the total input received by the decision unit over  all these patterns will be four times the sum of all the weight</li>
+</ul>
+<ul>
+<li>for pattern B, use training cases in all possible translations.</li>
+</ul>
+<ul>
+<li>each pixels will be activated by 4 different translations of pattern B</li>
+<li>so the total input received by the decision unit over  all these patterns will be four times the sum of all the weight</li>
+</ul>
+<ul>
+<li>but to discriminate correctly ,every single case of pattern A must provide more input to decision unit than every case of pattern B</li>
+</ul>
+<ul>
+<li>this is impossible if the sums over cases are the same</li>
+</ul>
+<h2 id="why-this-result-is-devastating-for-perceptrons"><a href="#why-this-result-is-devastating-for-perceptrons" class="headerlink" title="why this result is devastating for perceptrons"></a>why this result is devastating for perceptrons</h2><ul>
+<li>the whole point of pattern recognition is to recognize pattern despite transformations like translation</li>
+<li>minsky and papert’s “Group invariance theorem” says that the part a perceptron that learns cannot learn to do this if transformations form a group</li>
+</ul>
+<ul>
+<li>translation with wrap-around form a group</li>
+</ul>
+<ul>
+<li>to deal with such transformations ,a perceptron needs to use multiple feature unit to recognize transformations of informative sub-patterns</li>
+</ul>
+<ul>
+<li>so the tricky part of pattern recognition must  be solved  by the hand-coded<br>feature detector, not the learning  procedure.<h2 id="learning-with-hidden-units"><a href="#learning-with-hidden-units" class="headerlink" title="learning with hidden units"></a>learning with hidden units</h2></li>
+</ul>
+<ul>
+<li>networks without hidden units are very limited in the input-output mappings the can learn to model.</li>
+</ul>
+<ul>
+<li>more layers of linear units do not help, its still linear</li>
+<li>fixed output no-linearities are not enough</li>
+</ul>
+<ul>
+<li>we need multiple layers of adaptive, no-linear hidden units . but how can we train such nets?</li>
+</ul>
+<ul>
+<li>we need an efficient way of adapting all the weight  ,not just the last layer</li>
+<li>learning  the weights going into hidden units is equivalent to learning features</li>
+<li>this is difficult because nobody is telling us directly what the hidden units should do</li>
+</ul>
+<ul>
+<li>the hidden units became the features detector !</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+            <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
+          
+            <a href="/tags/data-mining/" rel="tag"># data mining</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/30/emacs_org/" rel="next" title="org mode 介紹">
+                <i class="fa fa-chevron-left"></i> org mode 介紹
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg"
+               alt="MarkWhite" />
+          <p class="site-author-name" itemprop="name">MarkWhite</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">categories</span>
+              
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/MarkWh1te" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/wh1te/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-2a"><span class="nav-number">1.</span> <span class="nav-text">lecture 2a</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#an-overview-of-the-main-types-of-neural-network-architecture"><span class="nav-number">1.1.</span> <span class="nav-text">an overview of the main types of neural network architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-2b"><span class="nav-number">2.</span> <span class="nav-text">lecture 2b</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#statistical-pattern-recognition"><span class="nav-number">2.1.</span> <span class="nav-text">statistical pattern recognition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#architecture"><span class="nav-number">2.2.</span> <span class="nav-text">architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#history"><span class="nav-number">2.3.</span> <span class="nav-text">history</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binary-threshold-neuron-decision-unit"><span class="nav-number">2.4.</span> <span class="nav-text">binary threshold neuron(decision unit)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#how-to-biases-using-the-same-rule-as-we-use-for-learning-weights"><span class="nav-number">2.5.</span> <span class="nav-text">how to biases using the same rule  as we use for learning weights</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-perceptron-convergence-important-procedure-training-binary-out-neuron-as-classifiers"><span class="nav-number">2.6.</span> <span class="nav-text">the perceptron convergence(important!) :procedure training  binary out neuron as classifiers</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-2c"><span class="nav-number">3.</span> <span class="nav-text">lecture 2c</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#geometrical-view-of-perceptrons"><span class="nav-number">4.</span> <span class="nav-text">geometrical view of perceptrons</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#weights-space"><span class="nav-number">4.1.</span> <span class="nav-text">weights space</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-cone-圆锥-of-feasible-solutions"><span class="nav-number">4.2.</span> <span class="nav-text">the cone(圆锥) of feasible solutions</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-2d"><span class="nav-number">5.</span> <span class="nav-text">lecture 2d</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#why-the-learning-works"><span class="nav-number">5.1.</span> <span class="nav-text">why the learning works</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#informal-sketch-of-proof-of-convergence"><span class="nav-number">5.2.</span> <span class="nav-text">informal sketch of proof of convergence</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lecture-2e"><span class="nav-number">6.</span> <span class="nav-text">lecture 2e</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-perceptron-can’t-do"><span class="nav-number">7.</span> <span class="nav-text">what perceptron can’t do</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-limitations-of-perceptrons"><span class="nav-number">7.1.</span> <span class="nav-text">the limitations of perceptrons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#what-binary-threshold-neuron-cannot-do"><span class="nav-number">7.2.</span> <span class="nav-text">what binary threshold neuron cannot do</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#geometric-view-of-what-binary-threshold-neuron-cannot-do"><span class="nav-number">7.3.</span> <span class="nav-text">geometric view of what binary threshold neuron cannot do</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#discriminating-simple-patterns-under-translation-with-wrap-around"><span class="nav-number">7.4.</span> <span class="nav-text">discriminating simple patterns under translation with wrap-around</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sketch-of-a-proof-that-a-binary-decision-unit-cannot-discriminate-patterns-with-the-same-number-of-on-pixels-assuming-translation-with-wrap-around"><span class="nav-number">7.5.</span> <span class="nav-text">sketch of a proof that a binary decision unit cannot discriminate patterns with the same number of on pixels(assuming translation with wrap-around)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#why-this-result-is-devastating-for-perceptrons"><span class="nav-number">7.6.</span> <span class="nav-text">why this result is devastating for perceptrons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#learning-with-hidden-units"><span class="nav-number">7.7.</span> <span class="nav-text">learning with hidden units</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">MarkWhite</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

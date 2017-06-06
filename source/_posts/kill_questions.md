@@ -1,6 +1,6 @@
 ---
 title: 刷题的正确姿势
-date: 2014-8-03 09:20
+date: 2016-8-03 09:20
 tags:
   - math
   - time killer
