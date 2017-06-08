@@ -97,11 +97,11 @@
 <meta name="keywords" content="machine learning,deep learning,data mining">
 <meta property="og:type" content="article">
 <meta property="og:title" content="无痛入门神经网络(1) 感知器">
-<meta property="og:url" content="http://yoursite.com/2017/06/08/perceptron_network/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/06/07/perceptron_network/index.html">
 <meta property="og:site_name" content="MarkWh1te&#39;s Blog">
 <meta property="og:description" content="综述 And God said, “Let there be light,” and there was light.  这个系列的主要目标是讲清楚什么是神经网络以及它的原理。既然题目是无痛入门，我会用尽量简单的数学讲明白问题。在遇到一定要用到的复杂数学知识时，我会提前做好介绍。编程方面，我也会最简单的Python代码实现。即这个系列对读者的最低要求为有求常见函数导数和可以用Python写出for">
 <meta property="og:image" content="http://7xq2dq.com1.z0.glb.clouddn.com/Screen%20Shot%202017-06-07%20at%209.45.09%20PM%20%281%29.png">
-<meta property="og:updated_time" content="2017-06-07T23:59:13.000Z">
+<meta property="og:updated_time" content="2017-06-08T02:27:22.471Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="无痛入门神经网络(1) 感知器">
 <meta name="twitter:description" content="综述 And God said, “Let there be light,” and there was light.  这个系列的主要目标是讲清楚什么是神经网络以及它的原理。既然题目是无痛入门，我会用尽量简单的数学讲明白问题。在遇到一定要用到的复杂数学知识时，我会提前做好介绍。编程方面，我也会最简单的Python代码实现。即这个系列对读者的最低要求为有求常见函数导数和可以用Python写出for">
@@ -133,7 +133,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/06/08/perceptron_network/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/07/perceptron_network/"/>
 
 
 
@@ -269,7 +269,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/perceptron_network/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/07/perceptron_network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
@@ -298,7 +298,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-08T09:17:00+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-07T18:17:00-07:00">
                 2017-06-08
               </time>
             
@@ -420,9 +420,9 @@
 <p>不相同: (1,0)-&gt;0,(0,1)-&gt;0</p>
 <p>用Python向量来表示就是<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> array</div><div class="line">training_data = [</div><div class="line">    (array([<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>]), <span class="number">1</span>),</div><div class="line">    (array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>]), <span class="number">0</span>),</div><div class="line">    (array([<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>]), <span class="number">0</span>),</div><div class="line">    (array([<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]), <span class="number">1</span>),</div><div class="line">]</div></pre></td></tr></table></figure></p>
 <p>但是如果你用这个training_data带入刚刚的代码训练，你会发现每次执行之后的感知器判断的结果都不一样，换而言之，这次没有收敛，我们没有得到一个稳定的权重向量。</p>
-<p>我们从代数上证明感知器没有办法完成这件事情，首先假设权重向量为的 {w1,w2},那根据训练数据和向量乘法法则我们可以得到下面四个不等式</p>
-<p> 0 <em> w_1+0 </em> w_2 = 0 &gt;= 0<br>, 1 <em> w_1 + 1 </em> w_2 &gt;= 0<br>,w_1 &lt; 0<br>,w_2 &lt; 0 </p>
-<p>显而易见这个式子是不可能成立的。</p>
+<p>我们从代数上证明感知器没有办法完成这件事情，首先假设权重向量为 {w1,w2},那根据训练数据和向量乘法法则我们可以得到下面四个不等式:</p>
+<p>$$<br>w_1 \cdot 0 + w_2 \cdot 0 = 0 &gt;= 0<br>$$<br>$$<br>w_1 \cdot 0 + w_2 \cdot 1 &lt; 0<br>$$<br>$$<br>w_1 \cdot 1 + w_2 \cdot 0 &lt; 0<br>$$<br>$$<br>w_1 \cdot 1 + w_2 \cdot 1 &gt;= 0<br>$$</p>
+<p>显而易见这是不可能成立的。</p>
 <h2 id="局限性的原因和解决办法"><a href="#局限性的原因和解决办法" class="headerlink" title="局限性的原因和解决办法"></a>局限性的原因和解决办法</h2><blockquote>
 <p>无论个体还是集体，过于单一化只会走向毁灭 —-攻殻機動隊 (1995)</p>
 </blockquote>
