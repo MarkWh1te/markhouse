@@ -98,8 +98,13 @@ training_data = [
 我们从代数上证明感知器没有办法完成这件事情，首先假设权重向量为 {w1,w2},那根据训练数据和向量乘法法则我们可以得到下面四个不等式:
 
 $$
-w_1 \cdot 0 + w_2 \cdot 0 = 0 >= 0 
+z = \sum_{k=1}^n xw +b
 $$
+
+$$
+w\_1 \cdot 0 + w\_2 \cdot 0 = 0 >= 0 
+$$
+
 $$
 w_1 \cdot 0 + w_2 \cdot 1 < 0 
 $$
@@ -125,9 +130,7 @@ $$
 * 解决办法
 如果我们想将输入向量质量对训练结果的影响降低，那么最容易想到的办法是增加层数，有更多的权重向量可以记录更多的信息。但这还不够，因为是单纯的增加层数没有解决单一化的问题。我们需要的是一个多层的，每一层都是非线性的神经网络。这样除了输入层和输出层，中间的隐藏层可以帮助我去分辨输入向量中的哪个纬度重要，这样就不会有感知器那样的局限性。但是新的问题就是我们如何去训练一个这样复杂的神经网络呢？嗯，下次我会讲讲这个的。
 
-
-
-
-
-
-
+## reference
+1. [Ian Goodfellow and Yoshua Bengio and Aaron Courville,Deep Learning,2016](http://www.deeplearningbook.org/)
+2. [Marvin Minsky and Seymour A. Papert,Perceptrons Expanded Edition,1987](https://mitpress.mit.edu/books/perceptrons)
+3. [Danilo Bargen's blog,2017](https://blog.dbrgn.ch/)
