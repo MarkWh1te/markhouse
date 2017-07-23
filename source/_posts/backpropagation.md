@@ -28,24 +28,16 @@ $$
 
 ## 反向传播算法
 现在我们已经有了非线性的激活函数，我们只要在多层的非线性神经元上找到输出误差和权重的导数关系，就可以完成神经网络的训练。
-1. 原理
 
 反向传播的本质是理由求导的链式法则高效地解出输出误差和权重的偏函数，下面我用对某一层求解来说明这个过程。
 ![backpropagation](http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG503-min.jpeg)
 图中yj表示j层神经元的输出，zj表示j层神经元的数据， yi表示i层神经元的输出,我们用wij来表示i层到j层的权重向量
 我们已经知道我们目标是求出输出误差(E)和权重变化(wij)的关系(偏导数)，由链式法则我们可以知道
-$$
-\frac{\partial E}{\partial z_{j}}\ = \frac{\partial y_{j}}{\partial z_{j}}\frac{\partial E}{\partial z_{j}}=y_{j}(1-y_{j})\frac{\partial E}{\partial z_{j}}
-$$
-$$
-\frac{\partial E}{\partial y_{j}}\ = \sum_{j}\frac{\partial z_{j}}{\partial y_{j}}\frac{\partial E}{\partial z_{j}}=\sum_{j}w_{ij}\frac{\partial E}{\partial z_{j}}
-$$
-$$
-\frac{\partial E}{\partial w_{ij}}\ = \frac{\partial z_{j}}{\partial w_{ij}}\frac{\partial E}{\partial z_{j}}=y_{j}\frac{\partial E}{\partial z_{j}}
-$$
+
+![derivatives](http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG265-min.jpeg)
 这样我们就明白了反向传播就是利用了链式求导的性质，每次都是通过后一层的误差来计算前一层的误差，这样就避免了重复计算某一层的误差多次。从而节约了计算量，让大规模的神经网络有了可以被计算的可能。
 
-2. 算法
+# 代码实现
 明白了反向传播的本质就是链式求导+梯度下降之后，我们来尝试自己实现一遍反向传播算法。
 
 数据集可以用上次在讲感知器时候最后提到的异或问题,即判断两个输入x1,x2是否一致。
@@ -107,7 +99,7 @@ for j in xrange(50000):
     syn0 += l0.T.dot(l1_delta)
 
 ```
-如果你执行了上面的代码，你会发现这种非线性的多层神经网络成功地解决了感知器无法解决的异或问题，当输入x1，x2 相同时，会输出0，不相同时，会输出1。但是我们学习反向传播和神经网路肯定不是来解决，这么简单的异或问题的。下一次我们就来讲一下关于神经网络在文字识别上的应用。
+如果你执行了上面的代码，你会发现这种非线性的多层神经网络成功地解决了感知器无法解决的异或问题，当输入x1，x2 相同时，会输出0，不相同时，会输出1。但是我们学习反向传播和神经网路肯定不是来解决，这么简单的异或问题的。下一次我就来讲一下关于神经网络在文字识别上的应用。
 
 
 
