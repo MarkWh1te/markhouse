@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="android,inoic," />
+  <meta name="keywords" content="deep learning,machine learning,data mining," />
 
 
 
@@ -93,17 +93,20 @@
 
 
 
-<meta name="description" content="Date: 2014-12-03 10:20Category:front end Ionic Official Guide 1. Install JDKopen your termial  sudo apt-get install openjdk-7-jre  2. Install Android SDKCordova Official Guide  Download android SDK  A">
-<meta name="keywords" content="android,inoic">
+<meta name="description" content="引子 Lolita, light of my life, fire of my loins. My sin, my soul.   上次讲感知器的时候有提到，由于感知器是线性的且只有两层,所以我们需要一个非线性的多层的神经网络。但随之而来的问题就是如何去训练一个这样复杂的神经网络。深度学习的本质是通过输入和输出得到一个拟合曲线，所以如果我们找到了输出误差和权重之间的变化关系（也就是偏函数），我们就">
+<meta name="keywords" content="deep learning,machine learning,data mining">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Use Inoic Build Android App">
-<meta property="og:url" content="http://yoursite.com/2016/05/31/ionic_build/index.html">
+<meta property="og:title" content="无痛入门神经网络(2) 反向传播">
+<meta property="og:url" content="http://yoursite.com/2017/07/15/backpropagation/index.html">
 <meta property="og:site_name" content="MarkWh1te&#39;s Blog">
-<meta property="og:description" content="Date: 2014-12-03 10:20Category:front end Ionic Official Guide 1. Install JDKopen your termial  sudo apt-get install openjdk-7-jre  2. Install Android SDKCordova Official Guide  Download android SDK  A">
-<meta property="og:updated_time" content="2017-07-02T23:25:28.000Z">
+<meta property="og:description" content="引子 Lolita, light of my life, fire of my loins. My sin, my soul.   上次讲感知器的时候有提到，由于感知器是线性的且只有两层,所以我们需要一个非线性的多层的神经网络。但随之而来的问题就是如何去训练一个这样复杂的神经网络。深度学习的本质是通过输入和输出得到一个拟合曲线，所以如果我们找到了输出误差和权重之间的变化关系（也就是偏函数），我们就">
+<meta property="og:image" content="http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG503-min.jpeg">
+<meta property="og:image" content="http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG265-min.jpeg">
+<meta property="og:updated_time" content="2017-07-19T00:07:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Use Inoic Build Android App">
-<meta name="twitter:description" content="Date: 2014-12-03 10:20Category:front end Ionic Official Guide 1. Install JDKopen your termial  sudo apt-get install openjdk-7-jre  2. Install Android SDKCordova Official Guide  Download android SDK  A">
+<meta name="twitter:title" content="无痛入门神经网络(2) 反向传播">
+<meta name="twitter:description" content="引子 Lolita, light of my life, fire of my loins. My sin, my soul.   上次讲感知器的时候有提到，由于感知器是线性的且只有两层,所以我们需要一个非线性的多层的神经网络。但随之而来的问题就是如何去训练一个这样复杂的神经网络。深度学习的本质是通过输入和输出得到一个拟合曲线，所以如果我们找到了输出误差和权重之间的变化关系（也就是偏函数），我们就">
+<meta name="twitter:image" content="http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG503-min.jpeg">
 
 
 
@@ -131,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/05/31/ionic_build/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/15/backpropagation/"/>
 
 
 
 
 
-  <title>Use Inoic Build Android App | MarkWh1te's Blog</title>
+  <title>无痛入门神经网络(2) 反向传播 | MarkWh1te's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -267,7 +270,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/31/ionic_build/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/backpropagation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
@@ -284,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Use Inoic Build Android App</h1>
+          <h1 class="post-title" itemprop="name headline">无痛入门神经网络(2) 反向传播</h1>
         
 
         <div class="post-meta">
@@ -296,8 +299,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-31T01:36:29+08:00">
-                2016-05-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-15T20:36:00Z">
+                2017-07-15
               </time>
             
 
@@ -319,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
+                  <a href="/categories/algorithms/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithms</span>
                   </a>
                 </span>
 
@@ -353,87 +356,20 @@
       
 
       
-        <p>Date: 2014-12-03 10:20<br>Category:front end</p>
-<p><a href="http://ionicframework.com/docs/guide/installation.html" target="_blank" rel="external">Ionic Official Guide</a></p>
-<h3 id="1-Install-JDK"><a href="#1-Install-JDK" class="headerlink" title="1. Install JDK"></a>1. Install JDK</h3><p>open your termial</p>
-<blockquote>
-<p>sudo apt-get install openjdk-7-jre</p>
+        <h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><blockquote>
+<p>Lolita, light of my life, fire of my loins. My sin, my soul. </p>
 </blockquote>
-<h3 id="2-Install-Android-SDK"><a href="#2-Install-Android-SDK" class="headerlink" title="2. Install Android SDK"></a>2. Install Android SDK</h3><p><a href="http://cordova.apache.org/docs/en/3.4.0/guide/platforms/android/index.html#Android%20Platform%20Guide" target="_blank" rel="external">Cordova Official Guide</a></p>
+<p>上次讲感知器的时候有提到，由于感知器是线性的且只有两层,所以我们需要一个非线性的多层的神经网络。但随之而来的问题就是如何去训练一个这样复杂的神经网络。深度学习的本质是通过输入和输出得到一个拟合曲线，所以如果我们找到了输出误差和权重之间的变化关系（也就是偏函数），我们就可以利用梯度下降等算法找到最优解，而反向传播就是一个高效寻找输出误差和权重变化关系的算法。</p>
+<h2 id="非线性的神经元"><a href="#非线性的神经元" class="headerlink" title="非线性的神经元"></a>非线性的神经元</h2><p>为了构建一个非线性的多层神经网络，我们需要做两件事情，第一是将训练的规则从线性推广到非线性，第二个是增加神经网络的层数,我们先做第一步。</p>
 <ul>
-<li>Download android SDK</li>
+<li>sigmoid 函数<br>在这里我介绍一种非线性函数，sigmoid 它的定义如下:<br>$$<br>y = \frac{1}{1+e^{-z}}\<br>$$<br>选用sigmoid 函数的其中一 个原因是它的导函数很简单,方便我们后面的解释:<br>$$<br>\frac{\partial y}{\partial z} = z(1-z)<br>$$<br>需要注意，非线性的激活函数有很多种，比如relu函数，tanh函数等等。</li>
 </ul>
-<p><strong>Android SDK means Android software development kit.It includes a comprehensive set of development tools.</strong></p>
-<p><a href="https://en.wikipedia.org/wiki/Software_development_kit" target="_blank" rel="external">What is SDK?</a></p>
-<p><a href="https://en.wikipedia.org/wiki/Android_software_development" target="_blank" rel="external">Android software development</a></p>
-<p><a href="https://dl.google.com/android/android-sdk_r24.4.1-linux.tgz" target="_blank" rel="external">linux android Sdk Download Link</a> </p>
-<ul>
-<li>Add  </li>
-</ul>
-<blockquote>
-<p>vim  ~/.bashrc</p>
-</blockquote>
-<p>add these lines</p>
-<blockquote>
-<p>export $ANDROID_HOME=/path/to/your/android-sdk-linux</p>
-<p>export PATH=$ANDROID_HOME/tools:$PATH</p>
-<p>export PATH=$ANDROID_HOME/platform-tools:$PATH</p>
-</blockquote>
-<p>now open your termial </p>
-<blockquote>
-<p>android </p>
-</blockquote>
-<p><strong>install these packages</strong>:</p>
-<p>Android SDK Build Tools</p>
-<p>Android SDK Platform-tools</p>
-<p>Android SDK Tools</p>
-<p>Android Support Repository</p>
-<p>Google Repository</p>
-<h3 id="3-Install-Ionic"><a href="#3-Install-Ionic" class="headerlink" title="3. Install Ionic"></a>3. Install Ionic</h3><blockquote>
-<p>sudo npm install -g cordova</p>
-<p>sudo npm install -g ionic</p>
-<p>cd myapp</p>
-<p>ionic platform add android</p>
-<p>cd myapp</p>
-<p>ionic serve</p>
-</blockquote>
-<p>you will your project on web brower</p>
-<h3 id="4-Testing"><a href="#4-Testing" class="headerlink" title="4. Testing"></a>4. Testing</h3><ul>
-<li>Install adb </li>
-</ul>
-<p>Android Debug Bridge (adb) is a versatile command line tool that lets you communicate with an emulator instance or connected Android-powered device.</p>
-<p><a href="https://developer.android.com/studio/command-line/adb.html" target="_blank" rel="external">What is adb?</a></p>
-<p>open your termial</p>
-<blockquote>
-<p>sudo add-apt-repository ppa:nilarimogard/webupd8</p>
-<p>sudo apt-get update</p>
-<p>sudo apt-get install android-tools-adb android-tools-fastboot</p>
-</blockquote>
-<p>Remember you need <strong>enable Developer Options on your Android phone</strong> and link it with your PC.</p>
-<blockquote>
-<p>cd /way/to/your/android/sdk/Android/Sdk/platform-tools</p>
-<p>adb devices</p>
-<p>adb start-server </p>
-<p>cd myapp</p>
-<p>ionic run android</p>
-</blockquote>
-<h3 id="5-Publishing"><a href="#5-Publishing" class="headerlink" title="5. Publishing"></a>5. Publishing</h3><blockquote>
-<p>cd myapp</p>
-<p>ionic build android</p>
-</blockquote>
-<h3 id="6-Publishing-with-Corsswalk"><a href="#6-Publishing-with-Corsswalk" class="headerlink" title="6. Publishing with Corsswalk"></a>6. Publishing with Corsswalk</h3><blockquote>
-<p>cd myapp</p>
-<p>ionic browser add crosswalk</p>
-<p>vim platform/android/build-extras.gradle</p>
-</blockquote>
-<p>add this line </p>
-<blockquote>
-<p>cdvBuildMultipleApks=false</p>
-</blockquote>
-<p>save </p>
-<blockquote>
-<p>ionic run android</p>
-</blockquote>
+<h2 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h2><p>现在我们已经有了非线性的激活函数，我们只要在多层的非线性神经元上找到输出误差和权重的导数关系，就可以完成神经网络的训练。</p>
+<p>反向传播的本质是理由求导的链式法则高效地解出输出误差和权重的偏函数，下面我用对某一层求解来说明这个过程。<br><img src="http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG503-min.jpeg" alt="backpropagation"><br>图中yj表示j层神经元的输出，zj表示j层神经元的数据， yi表示i层神经元的输出,我们用wij来表示i层到j层的权重向量<br>我们已经知道我们目标是求出输出误差(E)和权重变化(wij)的关系(偏导数)，由链式法则我们可以知道</p>
+<p><img src="http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG265-min.jpeg" alt="derivatives"><br>这样我们就明白了反向传播就是利用了链式求导的性质，每次都是通过后一层的误差来计算前一层的误差，这样就避免了重复计算某一层的误差多次。从而节约了计算量，让大规模的神经网络有了可以被计算的可能。</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>明白了反向传播的本质就是链式求导+梯度下降之后，我们来尝试自己实现一遍反向传播算法。</p>
+<p>数据集可以用上次在讲感知器时候最后提到的异或问题,即判断两个输入x1,x2是否一致。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">np.random.seed(<span class="number">1</span>)</div><div class="line"><span class="comment"># 生成输入向量X</span></div><div class="line">X = np.array(</div><div class="line">    [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],</div><div class="line">     [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>],</div><div class="line">     [<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</div><div class="line">     [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]]</div><div class="line">)</div><div class="line"><span class="comment"># 生成目标向量y</span></div><div class="line">y = np.array(</div><div class="line">    [[<span class="number">0</span>],</div><div class="line">     [<span class="number">1</span>],</div><div class="line">     [<span class="number">1</span>],</div><div class="line">     [<span class="number">0</span>]]</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># 定义sigmoid 和它的导函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">nonlin</span><span class="params">(x,deriv=False)</span>:</span></div><div class="line">    <span class="keyword">if</span>(deriv==<span class="keyword">True</span>):</div><div class="line">        <span class="keyword">return</span> x*(<span class="number">1</span>-x)</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+np.exp(-x))</div><div class="line">    </div><div class="line"><span class="comment"># 随机生成初始的随机向量 </span></div><div class="line">syn0 = <span class="number">2</span>*np.random.random((<span class="number">3</span>,<span class="number">4</span>)) - <span class="number">1</span></div><div class="line">syn1 = <span class="number">2</span>*np.random.random((<span class="number">4</span>,<span class="number">1</span>)) - <span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment"># 一开始我们先来5万次循环吧:)</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> xrange(<span class="number">50000</span>):</div><div class="line"></div><div class="line"><span class="comment"># 在反向传播前先正向传播，计算出每一层的输出</span></div><div class="line">    l0 = X</div><div class="line">    l1 = nonlin(np.dot(l0,syn0))</div><div class="line">    l2 = nonlin(np.dot(l1,syn1))</div><div class="line"></div><div class="line">    <span class="comment"># 计算出输入层和目标向量的差值(输出误差)</span></div><div class="line">    l2_error = y - l2</div><div class="line"></div><div class="line">    <span class="comment"># 每循环一万次，打印一次输出误差的数值</span></div><div class="line">    <span class="keyword">if</span> (j% <span class="number">10000</span>) == <span class="number">0</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">"Error:"</span> + str(np.mean(np.abs(l2_error)))</div><div class="line">        print(l2)</div><div class="line"></div><div class="line">    <span class="comment"># 计算输出层的误差</span></div><div class="line">    l2_delta = l2_error*nonlin(l2,deriv=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 计算前一层对后一层的误差影响</span></div><div class="line">    l1_error = l2_delta.dot(syn1.T)</div><div class="line"></div><div class="line">    <span class="comment"># 计算输入层对整体的误差</span></div><div class="line">    l1_delta = l1_error * nonlin(l1,deriv=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 修改权重向量让结果越来越逼近目标向量 </span></div><div class="line">    syn1 += l1.T.dot(l2_delta)</div><div class="line">    syn0 += l0.T.dot(l1_delta)</div></pre></td></tr></table></figure></p>
+<p>如果你执行了上面的代码，你会发现这种非线性的多层神经网络成功地解决了感知器无法解决的异或问题，当输入x1，x2 相同时，会输出0，不相同时，会输出1。但是我们学习反向传播和神经网路肯定不是来解决，这么简单的异或问题的。下一次我就来讲一下关于神经网络在文字识别上的应用。</p>
 
       
     </div>
@@ -463,9 +399,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"># android</a>
+            <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
           
-            <a href="/tags/inoic/" rel="tag"># inoic</a>
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+            <a href="/tags/data-mining/" rel="tag"># data mining</a>
           
         </div>
       
@@ -478,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/04/wxbot/" rel="next" title="通过微信网页api收集微信群聊天记录">
-                <i class="fa fa-chevron-left"></i> 通过微信网页api收集微信群聊天记录
+              <a href="/2017/06/07/perceptron_network/" rel="next" title="无痛入门神经网络(1) 感知器">
+                <i class="fa fa-chevron-left"></i> 无痛入门神经网络(1) 感知器
               </a>
             
           </div>
@@ -487,10 +425,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/03/kill_questions/" rel="prev" title="刷题的正确姿势">
-                刷题的正确姿势 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -667,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Install-JDK"><span class="nav-number">1.</span> <span class="nav-text">1. Install JDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Install-Android-SDK"><span class="nav-number">2.</span> <span class="nav-text">2. Install Android SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Install-Ionic"><span class="nav-number">3.</span> <span class="nav-text">3. Install Ionic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Testing"><span class="nav-number">4.</span> <span class="nav-text">4. Testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Publishing"><span class="nav-number">5.</span> <span class="nav-text">5. Publishing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-Publishing-with-Corsswalk"><span class="nav-number">6.</span> <span class="nav-text">6. Publishing with Corsswalk</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非线性的神经元"><span class="nav-number">2.</span> <span class="nav-text">非线性的神经元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向传播算法"><span class="nav-number">3.</span> <span class="nav-text">反向传播算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码实现"><span class="nav-number"></span> <span class="nav-text">代码实现</span></a></div>
             
 
           </div>

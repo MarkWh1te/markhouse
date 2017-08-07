@@ -12,6 +12,7 @@ In spare time, I like reading book, watching movie and running.
 
 If you have any suggestions about this blog ,please contact me, you can find on [twitter](https://twitter.com/)   and [zhihu](https://www.zhihu.com/people/wh1te/activities) or just mail to iamwh1temark@gmail.com.
 
+## My Slide
 
-
+* [Python Control Flow](http://slides.com/markwh1te/controlflow/fullscreen)
 
