@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-scp -r public/* vultr:blog
+scp -r public/* teng:/home/mark/code/blog

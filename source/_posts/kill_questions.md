@@ -7,15 +7,11 @@ tags:
 category: Algorithms
 ---
 
-
-
-
 刷题是指通过大量题目进行针对性的训练，如果掌握了有效方法不但可以有效地巩固学过的知识而且也可以在这个过程中收获很多的快乐！
 
 很多人认为刷题就是单纯地做题，这个认识是片面的。就像我之前说，刷题是__针对性的训练__。做题只是这个训练的表现形式。而一次正确训练过程应该是包括目标制定，执行操作，结果分析三个部分的。
 
 拿我在leecode上遇到的这道happy number来举例：
-
 
 ![leecode](http://7xq2dq.com1.z0.glb.clouddn.com/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-21%20%E4%B8%8B%E5%8D%8811.30.25.png)
 
@@ -29,8 +25,8 @@ category: Algorithms
 * 执行操作
 
   如果有清晰的想法，coding会变得轻松很多，python代码如下所示：
-  
-    
+
+```python
     class Solution():
       def isHappy(self, n):
           numSet = set()
@@ -43,12 +39,13 @@ category: Algorithms
                   n /= 10
               n = sum
           return n == 1
+```
 
 * 结果分析
-  
+
   如果对我们目前才用的方法是对是用两个while的循环完成了需求，我们知道所有循环都是可以用递归改写的，很多时候递写法会让代码更加优雅和可读，那么我们尝试来用递归解这道题目:
 
-
+```python
     class Solution():
         def __init__(self):
             self.past = set()
@@ -61,15 +58,7 @@ category: Algorithms
           else:
               self.past.add(intermediate)
               return self.isHappy(intermediate)
+```
 
   显而易见，在对变量进行恰当的命名和用递归重构后，这段代码看起来更加具有可读性了。而在这次训练中我不仅复习了hash的用法，还巩固了递归和循环相互转化。
-  
-
 合理地制定训练目标，认真地执行训练过程再加上对结果冷静反思，才是刷题的正确姿势。happy coding！ ：P
-  
-  
-  
-  
-  
-  
-  

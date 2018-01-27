@@ -267,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/backpropagation/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/16/backpropagation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
@@ -286,7 +286,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/15/backpropagation/" itemprop="url">无痛入门神经网络(2) 反向传播</a></h1>
+                <a class="post-title-link" href="/2017/07/16/backpropagation/" itemprop="url">无痛入门神经网络(2) 反向传播</a></h1>
         
 
         <div class="post-meta">
@@ -414,7 +414,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/07/perceptron_network/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/08/perceptron_network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
@@ -433,7 +433,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/07/perceptron_network/" itemprop="url">无痛入门神经网络(1) 感知器</a></h1>
+                <a class="post-title-link" href="/2017/06/08/perceptron_network/" itemprop="url">无痛入门神经网络(1) 感知器</a></h1>
         
 
         <div class="post-meta">
@@ -1056,37 +1056,14 @@
 <p>如果有清晰的想法，coding会变得轻松很多，python代码如下所示：</p>
 </li>
 </ul>
-<pre><code>class Solution():
-  def isHappy(self, n):
-      numSet = set()
-      while n != 1 and n not in numSet:
-          numSet.add(n)
-          sum = 0
-          while n:
-              digit = n % 10
-              sum += digit * digit
-              n /= 10
-          n = sum
-      return n == 1
-</code></pre><ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">()</span>:</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">isHappy</span><span class="params">(self, n)</span>:</span></div><div class="line">      numSet = set()</div><div class="line">      <span class="keyword">while</span> n != <span class="number">1</span> <span class="keyword">and</span> n <span class="keyword">not</span> <span class="keyword">in</span> numSet:</div><div class="line">          numSet.add(n)</div><div class="line">          sum = <span class="number">0</span></div><div class="line">          <span class="keyword">while</span> n:</div><div class="line">              digit = n % <span class="number">10</span></div><div class="line">              sum += digit * digit</div><div class="line">              n /= <span class="number">10</span></div><div class="line">          n = sum</div><div class="line">      <span class="keyword">return</span> n == <span class="number">1</span></div></pre></td></tr></table></figure>
+<ul>
 <li><p>结果分析</p>
 <p>如果对我们目前才用的方法是对是用两个while的循环完成了需求，我们知道所有循环都是可以用递归改写的，很多时候递写法会让代码更加优雅和可读，那么我们尝试来用递归解这道题目:</p>
 </li>
 </ul>
-<pre><code>class Solution():
-    def __init__(self):
-        self.past = set()
-    def isHappy(self, n):
-      intermediate = sum(int(i) ** 2 for i in str(n))
-      if intermediate == 1:
-          return True
-      elif intermediate in self.past:
-          return False
-      else:
-          self.past.add(intermediate)
-          return self.isHappy(intermediate)
-</code></pre><p>  显而易见，在对变量进行恰当的命名和用递归重构后，这段代码看起来更加具有可读性了。而在这次训练中我不仅复习了hash的用法，还巩固了递归和循环相互转化。</p>
-<p>合理地制定训练目标，认真地执行训练过程再加上对结果冷静反思，才是刷题的正确姿势。happy coding！ ：P</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">()</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.past = set()</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isHappy</span><span class="params">(self, n)</span>:</span></div><div class="line">      intermediate = sum(int(i) ** <span class="number">2</span> <span class="keyword">for</span> i <span class="keyword">in</span> str(n))</div><div class="line">      <span class="keyword">if</span> intermediate == <span class="number">1</span>:</div><div class="line">          <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">      <span class="keyword">elif</span> intermediate <span class="keyword">in</span> self.past:</div><div class="line">          <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">      <span class="keyword">else</span>:</div><div class="line">          self.past.add(intermediate)</div><div class="line">          <span class="keyword">return</span> self.isHappy(intermediate)</div></pre></td></tr></table></figure>
+<p>  显而易见，在对变量进行恰当的命名和用递归重构后，这段代码看起来更加具有可读性了。而在这次训练中我不仅复习了hash的用法，还巩固了递归和循环相互转化。<br>合理地制定训练目标，认真地执行训练过程再加上对结果冷静反思，才是刷题的正确姿势。happy coding！ ：P</p>
 
           
         
@@ -1130,7 +1107,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/30/ionic_build/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/31/ionic_build/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
@@ -1149,7 +1126,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/05/30/ionic_build/" itemprop="url">Use Inoic Build Android App</a></h1>
+                <a class="post-title-link" href="/2016/05/31/ionic_build/" itemprop="url">Use Inoic Build Android App</a></h1>
         
 
         <div class="post-meta">
@@ -1344,7 +1321,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/03/wxbot/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/04/wxbot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
@@ -1363,7 +1340,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/01/03/wxbot/" itemprop="url">通过微信网页api收集微信群聊天记录</a></h1>
+                <a class="post-title-link" href="/2016/01/04/wxbot/" itemprop="url">通过微信网页api收集微信群聊天记录</a></h1>
         
 
         <div class="post-meta">
