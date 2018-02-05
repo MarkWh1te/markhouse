@@ -100,12 +100,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/08/perceptron_network/index.html">
 <meta property="og:site_name" content="MarkWh1te&#39;s Blog">
 <meta property="og:description" content="综述 And God said, “Let there be light,” and there was light.  这个系列的主要目标是讲清楚什么是神经网络以及它的原理。既然题目是无痛入门，我会用尽量简单的数学讲明白问题。在遇到一定要用到的复杂数学知识时，我会提前做好介绍。编程方面，我也会最简单的Python代码实现。即这个系列对读者的最低要求为有求常见函数导数和可以用Python写出for">
-<meta property="og:image" content="http://7xq2dq.com1.z0.glb.clouddn.com/Screen%20Shot%202017-06-07%20at%209.45.09%20PM%20%281%29.png">
-<meta property="og:updated_time" content="2017-09-17T13:13:15.000Z">
+<meta property="og:image" content="https://t1.aixinxi.net/o_1c4quoas0tktt0o1eor140f182ha.png-w.jpg">
+<meta property="og:updated_time" content="2018-02-01T09:35:22.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="无痛入门神经网络(1) 感知器">
 <meta name="twitter:description" content="综述 And God said, “Let there be light,” and there was light.  这个系列的主要目标是讲清楚什么是神经网络以及它的原理。既然题目是无痛入门，我会用尽量简单的数学讲明白问题。在遇到一定要用到的复杂数学知识时，我会提前做好介绍。编程方面，我也会最简单的Python代码实现。即这个系列对读者的最低要求为有求常见函数导数和可以用Python写出for">
-<meta name="twitter:image" content="http://7xq2dq.com1.z0.glb.clouddn.com/Screen%20Shot%202017-06-07%20at%209.45.09%20PM%20%281%29.png">
+<meta name="twitter:image" content="https://t1.aixinxi.net/o_1c4quoas0tktt0o1eor140f182ha.png-w.jpg">
 
 
 
@@ -274,7 +274,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -298,7 +298,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-08T01:17:00Z">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-08T09:17:00+08:00">
                 2017-06-08
               </time>
             
@@ -359,8 +359,9 @@
 <p>And God said, “Let there be light,” and there was light.</p>
 </blockquote>
 <p>这个系列的主要目标是讲清楚什么是神经网络以及它的原理。既然题目是无痛入门，我会用尽量简单的数学讲明白问题。在遇到一定要用到的复杂数学知识时，我会提前做好介绍。编程方面，我也会最简单的Python代码实现。即这个系列对读者的最低要求为有求常见函数导数和可以用Python写出for循环的能力。</p>
-<h2 id="感知器的历史"><a href="#感知器的历史" class="headerlink" title="感知器的历史"></a>感知器的历史</h2><p>现在即使是很多没有接触过神经网络的人也知道神经网络由于架构的不同分为 深度神经网络(DNN),积卷神经网络(CNN)，循环神经网络(RNN)和对抗神经网络(GAN)等，但是在上世纪六十年代的时候，并没有神经网络这个名词,那时候只有一种被称作感知器的学习工具，在最开始的时候它很看起来很有前景。但是在1969年，Marvin Minsky在名为&lt;<perceptron>&gt;的书中分析了它的功能和它的局限性，导致了当时很多人对感知器以及神经网络嗤之以鼻。然而感知器的学习过程依然在广泛使用，比如google就在很多产品中使用了相关算法。</perceptron></p>
-<h2 id="感知器的架构"><a href="#感知器的架构" class="headerlink" title="感知器的架构"></a>感知器的架构</h2><p>一个感知器的架构如下图所示，<br><img src="http://7xq2dq.com1.z0.glb.clouddn.com/Screen%20Shot%202017-06-07%20at%209.45.09%20PM%20%281%29.png" alt="perceptron"><br>分别为:</p>
+<h2 id="感知器的历史"><a href="#感知器的历史" class="headerlink" title="感知器的历史"></a>感知器的历史</h2><p>现在即使是很多没有接触过神经网络的人也知道神经网络由于架构的不同分为 深度神经网络(DNN),积卷神经网络(CNN)，循环神经网络(RNN)和对抗神经网络(GAN)等，但是在上世纪六十年代的时候，并没有神经网络这个名词,那时候只有一种被称作感知器的学习工具，在最开始的时候它很看起来很有前景。但是在1969年，Marvin Minsky在名为&lt;&lt; perceptron &gt;&gt;的书中分析了它的功能和它的局限性，导致了当时很多人对感知器以及神经网络嗤之以鼻。然而感知器的学习过程依然在广泛使用，比如google就在很多产品中使用了相关算法。</p>
+<h2 id="感知器的架构"><a href="#感知器的架构" class="headerlink" title="感知器的架构"></a>感知器的架构</h2><p>一个感知器的架构如下图所示，</p>
+<p><img src="https://t1.aixinxi.net/o_1c4quoas0tktt0o1eor140f182ha.png-w.jpg" alt="perceptron"><br>分别为:</p>
 <ul>
 <li>输入向量（input),即为用来训练感知器的原始数据</li>
 <li>阶梯函数(stop function),可以通过生物上的神经元阈值来理解，当输入向量和权重相乘之后，如果结果大于阈值（比如0），则神经元激活(返回1)，反之则神经元未激活(返回0)</li>
@@ -440,7 +441,7 @@
 <li>解决办法<br>如果我们想将输入向量质量对训练结果的影响降低，那么最容易想到的办法是增加层数，有更多的权重向量可以记录更多的信息。但这还不够，因为是单纯的增加层数没有解决单一化的问题。我们需要的是一个多层的，每一层都是非线性的神经网络。这样除了输入层和输出层，中间的隐藏层可以帮助我去分辨输入向量中的哪个纬度重要，这样就不会有感知器那样的局限性。但是新的问题就是我们如何去训练一个这样复杂的神经网络呢？嗯，下次我会讲讲这个的。</li>
 </ul>
 <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ol>
-<li><a href="http://www.deeplearningbook.org/" target="_blank" rel="external">Ian Goodfellow and Yoshua Bengio and Aaron Courville,Deep Learning,2016</a></li>
+<li><a href="https://www.deeplearningbook.org/" target="_blank" rel="external">Ian Goodfellow and Yoshua Bengio and Aaron Courville,Deep Learning,2016</a></li>
 <li><a href="https://mitpress.mit.edu/books/perceptrons" target="_blank" rel="external">Marvin Minsky and Seymour A. Papert,Perceptrons Expanded Edition,1987</a></li>
 <li><a href="https://blog.dbrgn.ch/" target="_blank" rel="external">Danilo Bargen’s blog,2017</a></li>
 </ol>
@@ -581,7 +582,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg"
+               src="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg"
                alt="MarkWhite" />
           <p class="site-author-name" itemprop="name">MarkWhite</p>
            
@@ -702,7 +703,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

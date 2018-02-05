@@ -13,7 +13,7 @@ category: Algorithms
 
 拿我在leecode上遇到的这道happy number来举例：
 
-![leecode](http://7xq2dq.com1.z0.glb.clouddn.com/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-21%20%E4%B8%8B%E5%8D%8811.30.25.png)
+![leecode](https://t1.aixinxi.net/o_1c4qutrf9e0t1amt1nap11jk63qa.png-w.jpg)
 
 简单分析一下题目的大意，就是编写一个算法判断某个数字是否是“快乐数”。
 

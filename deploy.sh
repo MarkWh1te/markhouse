@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-scp -r public/* teng:/home/mark/code/blog
+scp -r public/* 119.29.147.15:/home/mark/code/blog

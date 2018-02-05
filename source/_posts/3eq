@@ -1,5 +1,0 @@
-Host hosthatch
-	hostname 216.250.96.238
-	user mark
-Host *
-    UseKeychain yes

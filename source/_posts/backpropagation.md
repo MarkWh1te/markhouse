@@ -9,7 +9,6 @@ categories: algorithms
 ---
 
 ## 引子
-> Lolita, light of my life, fire of my loins. My sin, my soul. 
 
 上次讲感知器的时候有提到，由于感知器是线性的且只有两层,所以我们需要一个非线性的多层的神经网络。但随之而来的问题就是如何去训练一个这样复杂的神经网络。深度学习的本质是通过输入和输出得到一个拟合曲线，所以如果我们找到了输出误差和权重之间的变化关系（也就是偏函数），我们就可以利用梯度下降等算法找到最优解，而反向传播就是一个高效寻找输出误差和权重变化关系的算法。
 
@@ -30,11 +29,12 @@ $$
 现在我们已经有了非线性的激活函数，我们只要在多层的非线性神经元上找到输出误差和权重的导数关系，就可以完成神经网络的训练。
 
 反向传播的本质是理由求导的链式法则高效地解出输出误差和权重的偏函数，下面我用对某一层求解来说明这个过程。
-![backpropagation](http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG503-min.jpeg)
+
+![back1](https://t1.aixinxi.net/o_1c4qufjkc1jtvfqebrb1a2rsrba.jpeg-w.jpg)
 图中yj表示j层神经元的输出，zj表示j层神经元的数据， yi表示i层神经元的输出,我们用wij来表示i层到j层的权重向量
 我们已经知道我们目标是求出输出误差(E)和权重变化(wij)的关系(偏导数)，由链式法则我们可以知道
 
-![derivatives](http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG265-min.jpeg)
+![back1](https://t1.aixinxi.net/o_1c4quivca1h9318mm52b1ji4rdda.jpeg-w.jpg)
 这样我们就明白了反向传播就是利用了链式求导的性质，每次都是通过后一层的误差来计算前一层的误差，这样就避免了重复计算某一层的误差多次。从而节约了计算量，让大规模的神经网络有了可以被计算的可能。
 
 # 代码实现

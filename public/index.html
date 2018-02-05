@@ -272,7 +272,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -357,17 +357,15 @@
       
         
           
-            <h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><blockquote>
-<p>Lolita, light of my life, fire of my loins. My sin, my soul. </p>
-</blockquote>
-<p>上次讲感知器的时候有提到，由于感知器是线性的且只有两层,所以我们需要一个非线性的多层的神经网络。但随之而来的问题就是如何去训练一个这样复杂的神经网络。深度学习的本质是通过输入和输出得到一个拟合曲线，所以如果我们找到了输出误差和权重之间的变化关系（也就是偏函数），我们就可以利用梯度下降等算法找到最优解，而反向传播就是一个高效寻找输出误差和权重变化关系的算法。</p>
+            <h2 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h2><p>上次讲感知器的时候有提到，由于感知器是线性的且只有两层,所以我们需要一个非线性的多层的神经网络。但随之而来的问题就是如何去训练一个这样复杂的神经网络。深度学习的本质是通过输入和输出得到一个拟合曲线，所以如果我们找到了输出误差和权重之间的变化关系（也就是偏函数），我们就可以利用梯度下降等算法找到最优解，而反向传播就是一个高效寻找输出误差和权重变化关系的算法。</p>
 <h2 id="非线性的神经元"><a href="#非线性的神经元" class="headerlink" title="非线性的神经元"></a>非线性的神经元</h2><p>为了构建一个非线性的多层神经网络，我们需要做两件事情，第一是将训练的规则从线性推广到非线性，第二个是增加神经网络的层数,我们先做第一步。</p>
 <ul>
 <li>sigmoid 函数<br>在这里我介绍一种非线性函数，sigmoid 它的定义如下:<br>$$<br>y = \frac{1}{1+e^{-z}}\<br>$$<br>选用sigmoid 函数的其中一 个原因是它的导函数很简单,方便我们后面的解释:<br>$$<br>\frac{\partial y}{\partial z} = z(1-z)<br>$$<br>需要注意，非线性的激活函数有很多种，比如relu函数，tanh函数等等。</li>
 </ul>
 <h2 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h2><p>现在我们已经有了非线性的激活函数，我们只要在多层的非线性神经元上找到输出误差和权重的导数关系，就可以完成神经网络的训练。</p>
-<p>反向传播的本质是理由求导的链式法则高效地解出输出误差和权重的偏函数，下面我用对某一层求解来说明这个过程。<br><img src="http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG503-min.jpeg" alt="backpropagation"><br>图中yj表示j层神经元的输出，zj表示j层神经元的数据， yi表示i层神经元的输出,我们用wij来表示i层到j层的权重向量<br>我们已经知道我们目标是求出输出误差(E)和权重变化(wij)的关系(偏导数)，由链式法则我们可以知道</p>
-<p><img src="http://7xq2dq.com1.z0.glb.clouddn.com/WechatIMG265-min.jpeg" alt="derivatives"><br>这样我们就明白了反向传播就是利用了链式求导的性质，每次都是通过后一层的误差来计算前一层的误差，这样就避免了重复计算某一层的误差多次。从而节约了计算量，让大规模的神经网络有了可以被计算的可能。</p>
+<p>反向传播的本质是理由求导的链式法则高效地解出输出误差和权重的偏函数，下面我用对某一层求解来说明这个过程。</p>
+<p><img src="https://t1.aixinxi.net/o_1c4qufjkc1jtvfqebrb1a2rsrba.jpeg-w.jpg" alt="back1"><br>图中yj表示j层神经元的输出，zj表示j层神经元的数据， yi表示i层神经元的输出,我们用wij来表示i层到j层的权重向量<br>我们已经知道我们目标是求出输出误差(E)和权重变化(wij)的关系(偏导数)，由链式法则我们可以知道</p>
+<p><img src="https://t1.aixinxi.net/o_1c4quivca1h9318mm52b1ji4rdda.jpeg-w.jpg" alt="back1"><br>这样我们就明白了反向传播就是利用了链式求导的性质，每次都是通过后一层的误差来计算前一层的误差，这样就避免了重复计算某一层的误差多次。从而节约了计算量，让大规模的神经网络有了可以被计算的可能。</p>
 <h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>明白了反向传播的本质就是链式求导+梯度下降之后，我们来尝试自己实现一遍反向传播算法。</p>
 <p>数据集可以用上次在讲感知器时候最后提到的异或问题,即判断两个输入x1,x2是否一致。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">np.random.seed(<span class="number">1</span>)</div><div class="line"><span class="comment"># 生成输入向量X</span></div><div class="line">X = np.array(</div><div class="line">    [[<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>],</div><div class="line">     [<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>],</div><div class="line">     [<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>],</div><div class="line">     [<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>]]</div><div class="line">)</div><div class="line"><span class="comment"># 生成目标向量y</span></div><div class="line">y = np.array(</div><div class="line">    [[<span class="number">0</span>],</div><div class="line">     [<span class="number">1</span>],</div><div class="line">     [<span class="number">1</span>],</div><div class="line">     [<span class="number">0</span>]]</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># 定义sigmoid 和它的导函数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">nonlin</span><span class="params">(x,deriv=False)</span>:</span></div><div class="line">    <span class="keyword">if</span>(deriv==<span class="keyword">True</span>):</div><div class="line">        <span class="keyword">return</span> x*(<span class="number">1</span>-x)</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+np.exp(-x))</div><div class="line">    </div><div class="line"><span class="comment"># 随机生成初始的随机向量 </span></div><div class="line">syn0 = <span class="number">2</span>*np.random.random((<span class="number">3</span>,<span class="number">4</span>)) - <span class="number">1</span></div><div class="line">syn1 = <span class="number">2</span>*np.random.random((<span class="number">4</span>,<span class="number">1</span>)) - <span class="number">1</span></div><div class="line"></div><div class="line"><span class="comment"># 一开始我们先来5万次循环吧:)</span></div><div class="line"><span class="keyword">for</span> j <span class="keyword">in</span> xrange(<span class="number">50000</span>):</div><div class="line"></div><div class="line"><span class="comment"># 在反向传播前先正向传播，计算出每一层的输出</span></div><div class="line">    l0 = X</div><div class="line">    l1 = nonlin(np.dot(l0,syn0))</div><div class="line">    l2 = nonlin(np.dot(l1,syn1))</div><div class="line"></div><div class="line">    <span class="comment"># 计算出输入层和目标向量的差值(输出误差)</span></div><div class="line">    l2_error = y - l2</div><div class="line"></div><div class="line">    <span class="comment"># 每循环一万次，打印一次输出误差的数值</span></div><div class="line">    <span class="keyword">if</span> (j% <span class="number">10000</span>) == <span class="number">0</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">"Error:"</span> + str(np.mean(np.abs(l2_error)))</div><div class="line">        print(l2)</div><div class="line"></div><div class="line">    <span class="comment"># 计算输出层的误差</span></div><div class="line">    l2_delta = l2_error*nonlin(l2,deriv=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 计算前一层对后一层的误差影响</span></div><div class="line">    l1_error = l2_delta.dot(syn1.T)</div><div class="line"></div><div class="line">    <span class="comment"># 计算输入层对整体的误差</span></div><div class="line">    l1_delta = l1_error * nonlin(l1,deriv=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="comment"># 修改权重向量让结果越来越逼近目标向量 </span></div><div class="line">    syn1 += l1.T.dot(l2_delta)</div><div class="line">    syn0 += l0.T.dot(l1_delta)</div></pre></td></tr></table></figure></p>
 <p>如果你执行了上面的代码，你会发现这种非线性的多层神经网络成功地解决了感知器无法解决的异或问题，当输入x1，x2 相同时，会输出0，不相同时，会输出1。但是我们学习反向传播和神经网路肯定不是来解决，这么简单的异或问题的。下一次我就来讲一下关于神经网络在文字识别上的应用。</p>
@@ -419,7 +417,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -508,8 +506,9 @@
 <p>And God said, “Let there be light,” and there was light.</p>
 </blockquote>
 <p>这个系列的主要目标是讲清楚什么是神经网络以及它的原理。既然题目是无痛入门，我会用尽量简单的数学讲明白问题。在遇到一定要用到的复杂数学知识时，我会提前做好介绍。编程方面，我也会最简单的Python代码实现。即这个系列对读者的最低要求为有求常见函数导数和可以用Python写出for循环的能力。</p>
-<h2 id="感知器的历史"><a href="#感知器的历史" class="headerlink" title="感知器的历史"></a>感知器的历史</h2><p>现在即使是很多没有接触过神经网络的人也知道神经网络由于架构的不同分为 深度神经网络(DNN),积卷神经网络(CNN)，循环神经网络(RNN)和对抗神经网络(GAN)等，但是在上世纪六十年代的时候，并没有神经网络这个名词,那时候只有一种被称作感知器的学习工具，在最开始的时候它很看起来很有前景。但是在1969年，Marvin Minsky在名为&lt;<perceptron>&gt;的书中分析了它的功能和它的局限性，导致了当时很多人对感知器以及神经网络嗤之以鼻。然而感知器的学习过程依然在广泛使用，比如google就在很多产品中使用了相关算法。</perceptron></p>
-<h2 id="感知器的架构"><a href="#感知器的架构" class="headerlink" title="感知器的架构"></a>感知器的架构</h2><p>一个感知器的架构如下图所示，<br><img src="http://7xq2dq.com1.z0.glb.clouddn.com/Screen%20Shot%202017-06-07%20at%209.45.09%20PM%20%281%29.png" alt="perceptron"><br>分别为:</p>
+<h2 id="感知器的历史"><a href="#感知器的历史" class="headerlink" title="感知器的历史"></a>感知器的历史</h2><p>现在即使是很多没有接触过神经网络的人也知道神经网络由于架构的不同分为 深度神经网络(DNN),积卷神经网络(CNN)，循环神经网络(RNN)和对抗神经网络(GAN)等，但是在上世纪六十年代的时候，并没有神经网络这个名词,那时候只有一种被称作感知器的学习工具，在最开始的时候它很看起来很有前景。但是在1969年，Marvin Minsky在名为&lt;&lt; perceptron &gt;&gt;的书中分析了它的功能和它的局限性，导致了当时很多人对感知器以及神经网络嗤之以鼻。然而感知器的学习过程依然在广泛使用，比如google就在很多产品中使用了相关算法。</p>
+<h2 id="感知器的架构"><a href="#感知器的架构" class="headerlink" title="感知器的架构"></a>感知器的架构</h2><p>一个感知器的架构如下图所示，</p>
+<p><img src="https://t1.aixinxi.net/o_1c4quoas0tktt0o1eor140f182ha.png-w.jpg" alt="perceptron"><br>分别为:</p>
 <ul>
 <li>输入向量（input),即为用来训练感知器的原始数据</li>
 <li>阶梯函数(stop function),可以通过生物上的神经元阈值来理解，当输入向量和权重相乘之后，如果结果大于阈值（比如0），则神经元激活(返回1)，反之则神经元未激活(返回0)</li>
@@ -589,7 +588,7 @@
 <li>解决办法<br>如果我们想将输入向量质量对训练结果的影响降低，那么最容易想到的办法是增加层数，有更多的权重向量可以记录更多的信息。但这还不够，因为是单纯的增加层数没有解决单一化的问题。我们需要的是一个多层的，每一层都是非线性的神经网络。这样除了输入层和输出层，中间的隐藏层可以帮助我去分辨输入向量中的哪个纬度重要，这样就不会有感知器那样的局限性。但是新的问题就是我们如何去训练一个这样复杂的神经网络呢？嗯，下次我会讲讲这个的。</li>
 </ul>
 <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ol>
-<li><a href="http://www.deeplearningbook.org/" target="_blank" rel="external">Ian Goodfellow and Yoshua Bengio and Aaron Courville,Deep Learning,2016</a></li>
+<li><a href="https://www.deeplearningbook.org/" target="_blank" rel="external">Ian Goodfellow and Yoshua Bengio and Aaron Courville,Deep Learning,2016</a></li>
 <li><a href="https://mitpress.mit.edu/books/perceptrons" target="_blank" rel="external">Marvin Minsky and Seymour A. Papert,Perceptrons Expanded Edition,1987</a></li>
 <li><a href="https://blog.dbrgn.ch/" target="_blank" rel="external">Danilo Bargen’s blog,2017</a></li>
 </ol>
@@ -641,7 +640,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -790,7 +789,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -957,7 +956,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1045,7 +1044,7 @@
             <p>刷题是指通过大量题目进行针对性的训练，如果掌握了有效方法不但可以有效地巩固学过的知识而且也可以在这个过程中收获很多的快乐！</p>
 <p>很多人认为刷题就是单纯地做题，这个认识是片面的。就像我之前说，刷题是<strong>针对性的训练</strong>。做题只是这个训练的表现形式。而一次正确训练过程应该是包括目标制定，执行操作，结果分析三个部分的。</p>
 <p>拿我在leecode上遇到的这道happy number来举例：</p>
-<p><img src="http://7xq2dq.com1.z0.glb.clouddn.com/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202016-05-21%20%E4%B8%8B%E5%8D%8811.30.25.png" alt="leecode"></p>
+<p><img src="https://t1.aixinxi.net/o_1c4qutrf9e0t1amt1nap11jk63qa.png-w.jpg" alt="leecode"></p>
 <p>简单分析一下题目的大意，就是编写一个算法判断某个数字是否是“快乐数”。</p>
 <p>快乐数的定义过程如下：从任意一个正整数开始，将原数替换为其每一位的平方和，重复此过程直到数字=1（此时其值将不再变化），或者进入一个不包含1的无限循环。那些以1为过程终止的数字即为“快乐数”。（就想图片中那个example中的19一样）</p>
 <ul>
@@ -1112,7 +1111,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1326,7 +1325,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1477,7 +1476,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="MarkWhite">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg">
+      <meta itemprop="image" content="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1644,7 +1643,7 @@
       <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="http://7xq2dq.com1.z0.glb.clouddn.com/minlake.jpg"
+               src="https://t1.aixinxi.net/o_1c4r0f0j4fkt1n5919c81h5f13moa.jpg-w.jpg"
                alt="MarkWhite" />
           <p class="site-author-name" itemprop="name">MarkWhite</p>
            
@@ -1749,7 +1748,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
